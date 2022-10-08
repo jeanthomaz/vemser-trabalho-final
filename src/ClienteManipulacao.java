@@ -34,7 +34,7 @@ public class ClienteManipulacao {
         clienteProcurado.setSenha(cliente.getSenha());
     }
 
-    public boolean testandoEmail(String email) throws EmailRepetidoException {
+    public boolean testarEmail(String email) throws EmailRepetidoException {
         Optional<Cliente> testEmail = listaDeClientes.stream()
                 .filter(cliente -> cliente.getEmail().contains(email))
                 .findFirst();
@@ -45,7 +45,23 @@ public class ClienteManipulacao {
         }
     }
 
-
+    public Cliente fazerLogin(String email, String senha) throws EmailRepetidoException {
+        Optional<Cliente> acessarEmail = listaDeClientes.stream()
+                .filter(cliente -> cliente.getEmail().contains(email))
+                .findFirst();
+        if (acessarEmail.isPresent()) {
+            Optional<Cliente> senhaIgual = acessarEmail.stream()
+                    .filter(cliente -> cliente.getSenha().contains(senha))
+                    .findFirst();
+            if (senhaIgual.isPresent()) {
+                return senhaIgual.get();
+            } else {
+                throw new EmailRepetidoException("Senha não existente, digitar novamente");
+            }
+        } else {
+            throw new EmailRepetidoException("E-mail não existente, digitar novamente");
+        }
+    }
 
     public void listarClientes() {
         for (int i = 0; i < listaDeClientes.size(); i++) {

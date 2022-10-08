@@ -6,6 +6,15 @@ public class Carrinho {
     List<Produto> produtos = new ArrayList<>(); //TESTE CRUD QUANTIDADE
     List<Cupom> cupons = new ArrayList<>(); //TESTE CRUD VALIDADE
 
+    public Carrinho(){
+
+    }
+
+    public Carrinho(List<Produto> produtos) {
+        this.produtos = produtos;
+    }
+
+
     public List<Produto> getProdutos() {
         return produtos;
     }
@@ -20,5 +29,12 @@ public class Carrinho {
 
     public void setCupons(List<Cupom> cupons) {
         this.cupons = cupons;
+    }
+
+    @Override
+    public String toString() {
+        return "Carrinho{" +
+                "produtos=" + produtos +
+                '}';
     }
 }

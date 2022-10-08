@@ -23,10 +23,12 @@ public class Cliente extends Cadastro implements Comprar, Vender {
     }
 
     public Cadastro getCadastro() {
+
         return cadastro;
     }
 
     public void setCadastro(Cadastro cadastro) {
+
         this.cadastro = cadastro;
     }
 
@@ -55,7 +57,7 @@ public class Cliente extends Cadastro implements Comprar, Vender {
 
     @Override
     public void formaPag(String pix) {
-
+        this.setPix(pix);
     }
 
     @Override

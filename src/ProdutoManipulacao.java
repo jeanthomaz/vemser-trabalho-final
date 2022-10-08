@@ -3,7 +3,7 @@ import java.util.List;
 
 public class ProdutoManipulacao {
 
-    private List<Produto> listaDeProdutos;
+    private final List<Produto> listaDeProdutos;
 
     public ProdutoManipulacao() {
         this.listaDeProdutos = new ArrayList<>();
@@ -31,5 +31,10 @@ public class ProdutoManipulacao {
         for (int i = 0; i < listaDeProdutos.size(); i++) {
             System.out.println("id=" + i + " | " + listaDeProdutos.get(i));
         }
+    }
+
+    public List<Produto> selecionarProdutoPorIndice(Integer index){
+        this.listaDeProdutos.contains(index.intValue());
+        return null;
     }
 }
