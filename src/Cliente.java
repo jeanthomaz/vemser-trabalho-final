@@ -47,12 +47,8 @@ public class Cliente extends Cadastro implements Comprar, Vender {
     }
 
     @Override
-    public void comprar(int quantidade, double valor) {
-//            if(valor > 0 && quantidade > 0){
-//
-//            } else {
-//                System.out.println("Impossível realizar a compra. ");
-//            }
+    public void comprar() {
+        System.out.println("Compra realizada com sucesso.");
     }
 
 

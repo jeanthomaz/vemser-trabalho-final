@@ -29,11 +29,14 @@ public class Main {
         Carrinho carrinho1 = new Carrinho(List.of(produto1), cupoms1);
         carrinhoManipulacao.adicionarCarrinho(carrinho1);
         Scanner entrada = new Scanner(System.in);
+        Cliente cliente = new Cliente();
 
         int escolha = 9;
         Carrinho carrinho2 = new Carrinho();
         System.out.println("Boas compras, seu carrinho foi inicializado com sucesso !");
+
         while (escolha != 0) {
+
             System.out.println("");
             System.out.println("Escolha uma opção: ");
             System.out.println("1 - Adicionar produtos.");
@@ -85,25 +88,24 @@ public class Main {
                     entrada.nextLine();
                     switch (c){
                         case 1 ->{
-                            System.out.println("INSERIR CLIENTE.COMPRARA AQUI");
+                            System.out.println("Efetuando a compra...");
+                            System.out.println("Tecle para continuar.");
+                            entrada.nextLine();
+                            cliente.comprar();
                         }
                         case 2 ->{
 
                             for (int i = 0; i < carrinho2.getProdutos().size(); i++){
                                 produtoManipulacao.adicionarProduto(carrinho2.getProdutos().get(i));
                             }
-//                            Iterator itr = carrinho2.getProdutos().iterator();
-//                            while (itr.hasNext())
-//                            {
-//                               int x = (Produto) itr.next();
-//                                if (x < 10)
-//                                    itr.remove();
-//                            }
                             cupomManipulacao.adicionarCupom(carrinho2.getCupom());
+                            Carrinho carrinho3 = new Carrinho();
+                            carrinho2 = carrinho3;
                         }
                     }
                 }
                 case 0 -> {
+                    //ORGANIZAR A SAIDA
                     entrada.close();
                 }
             }
