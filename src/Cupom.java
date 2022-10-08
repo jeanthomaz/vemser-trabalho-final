@@ -13,6 +13,14 @@ public class Cupom {
         System.out.println("Ainda é autenticável: " + validade);
     }
 
+    @Override
+    public String toString() {
+        return "Cupom{" +
+                "valor=" + valor +
+                ", validade=" + validade +
+                '}';
+    }
+
     public double getValor() {
         return valor;
     }

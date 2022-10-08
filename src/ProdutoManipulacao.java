@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class ProdutoManipulacao {
 
@@ -27,6 +28,8 @@ public class ProdutoManipulacao {
         produtoProcurado.setDescricao(produto.getDescricao());
     }
 
+
+
     public void listarProdutos() {
         for (int i = 0; i < listaDeProdutos.size(); i++) {
             System.out.println("id=" + i + " | " + listaDeProdutos.get(i));
@@ -36,5 +39,9 @@ public class ProdutoManipulacao {
     public List<Produto> selecionarProdutoPorIndice(Integer index){
         this.listaDeProdutos.contains(index.intValue());
         return null;
+    }
+
+    public Produto getProduto(int index){
+        return listaDeProdutos.get(index);
     }
 }

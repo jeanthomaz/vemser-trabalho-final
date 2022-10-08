@@ -55,10 +55,6 @@ public class Cliente extends Cadastro implements Comprar, Vender {
 //            }
     }
 
-    @Override
-    public void formaPag(String pix) {
-        this.setPix(pix);
-    }
 
     @Override
     public void vender(int quantidade, double valor) {
@@ -90,10 +86,6 @@ public class Cliente extends Cadastro implements Comprar, Vender {
         cliente.getPix();
     }
 
-    @Override
-    public void formaRec(String pix) {
-        this.getPix();
-    }
 
     public String getPix() {
         return pix;

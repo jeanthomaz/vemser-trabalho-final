@@ -28,4 +28,8 @@ public class CupomManipulacao {
             System.out.println("id=" + i + " | " + listaDeCupons.get(i));
         }
     }
+
+    public Cupom getCupom(int index){
+        return listaDeCupons.get(index);
+    }
 }

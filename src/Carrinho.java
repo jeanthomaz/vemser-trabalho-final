@@ -3,17 +3,37 @@ import java.util.List;
 
 public class Carrinho {
 
-    List<Produto> produtos = new ArrayList<>(); //TESTE CRUD QUANTIDADE
-    List<Cupom> cupons = new ArrayList<>(); //TESTE CRUD VALIDADE
+    private List<Produto> produtos = new ArrayList<>(); //TESTE CRUD QUANTIDADE
+    private List<Cupom> cupons = new ArrayList<>(); //TESTE CRUD VALIDADE
+
+    private Cupom cupom;
 
     public Carrinho(){
 
     }
 
-    public Carrinho(List<Produto> produtos) {
+    public Carrinho(List<Produto> produtos, Cupom cupom) {
+
         this.produtos = produtos;
+        this.cupom = cupom;
     }
 
+    public double getValor(){
+        double a = 1;
+        double b = 0;
+        double aux;
+        for(int i = 0; i<produtos.size();i++){
+            aux = produtos.get(i).getValor();
+            a = aux + b;
+            b = a;
+        }
+       double valor = b;
+       return valor;
+    }
+
+    public void removerProdutos(){
+
+    }
 
     public List<Produto> getProdutos() {
         return produtos;
@@ -23,12 +43,12 @@ public class Carrinho {
         this.produtos = produtos;
     }
 
-    public List<Cupom> getCupons() {
-        return cupons;
+    public Cupom getCupom() {
+        return cupom;
     }
 
-    public void setCupons(List<Cupom> cupons) {
-        this.cupons = cupons;
+    public void setCupom(Cupom cupom) {
+        this.cupom = cupom;
     }
 
     @Override

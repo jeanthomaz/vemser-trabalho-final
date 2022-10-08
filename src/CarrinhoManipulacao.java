@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class CarrinhoManipulacao {
+public class CarrinhoManipulacao{
 
     private List<Carrinho> listaDeCarrinho;
 
@@ -20,10 +20,10 @@ public class CarrinhoManipulacao {
     public void editarCliente(Integer index, Carrinho carrinho) {
         Carrinho carrinhoProcurado = listaDeCarrinho.get(index);
         carrinhoProcurado.setProdutos(carrinho.getProdutos());
-        carrinhoProcurado.setCupons(carrinho.getCupons());
+        carrinhoProcurado.setCupom(carrinho.getCupom());
     }
 
-    public void listarPessoas() {
+    public void listarCarrinho() {
         for (int i = 0; i < listaDeCarrinho.size(); i++) {
             System.out.println("id=" + i + " | " + listaDeCarrinho.get(i));
         }

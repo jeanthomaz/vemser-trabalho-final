@@ -74,6 +74,7 @@ public class TestCliente {
 
                         case 1 ->{
 
+                            //O MAIN.JAVA ENTRA AQUI
 
                         }
 
