@@ -8,7 +8,7 @@ public class Carrinho {
 
     private Cupom cupom;
 
-    public Carrinho(){
+    public Carrinho() {
 
     }
 
@@ -19,19 +19,23 @@ public class Carrinho {
     }
 
     public double getValor() {
-        double a = 1;
-        double b = 0;
-        double aux;
-        for (int i = 0; i < produtos.size(); i++) {
-            aux = produtos.get(i).getValor() * produtos.get(i).getQuantidade();
-            a = aux + b;
-            b = a;
-        }
-        if (cupom == null) {
-            return b;
+        if (produtos.size() > 0) {
+            double a = 1;
+            double b = 0;
+            double aux;
+            for (int i = 0; i < produtos.size(); i++) {
+                aux = produtos.get(i).getValor() * produtos.get(i).getQuantidade();
+                a = aux + b;
+                b = a;
+            }
+            if (cupom == null) {
+                return b;
+            } else {
+                double valor = b - cupom.getValor();
+                return valor;
+            }
         } else {
-            double valor = b - cupom.getValor();
-            return valor;
+           return 0;
         }
     }
 

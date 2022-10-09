@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class TesteGeral2 {
+public class TesteApresentacao {
 
     public static void main(String[] args) throws EmailRepetidoException {
 
@@ -35,6 +35,8 @@ public class TesteGeral2 {
         Carrinho carrinho2 = new Carrinho();
 
         int escolha = 9;
+        int escolhaFazer = 9;
+        int escolha3 = 9;
 
         while (escolha != 0) {
 
@@ -64,14 +66,14 @@ public class TesteGeral2 {
                     System.out.println("Digite 1 para comprar");
                     System.out.println("Digite 2 para vender");
                     System.out.println("Digite 0 para sair");
-                    int escolhaFazer = entrada.nextInt();
+                    escolhaFazer = entrada.nextInt();
                     entrada.nextLine();
 
                     switch (escolhaFazer) {
 
                         case 1 -> { // PARTE DA COMPRA
 
-                            while (escolha != 0) {
+                            while (escolhaFazer != 0) {
 
                                 System.out.println("");
                                 System.out.println("Escolha uma opção: ");
@@ -80,9 +82,9 @@ public class TesteGeral2 {
                                 System.out.println("3 - Efetuar a compra");
                                 System.out.println("0 - Encerrar carrinho");
 
-                                escolha = entrada.nextInt();
+                                escolhaFazer = entrada.nextInt();
                                 entrada.nextLine();
-                                switch (escolha) {
+                                switch (escolhaFazer) {
                                     case 1 -> {
                                         if (produtoManipulacao.temProdutos()) {
                                             System.out.println("Escolha seu produto: ");
@@ -132,6 +134,8 @@ public class TesteGeral2 {
                                             case 1 -> {
                                                 System.out.println("Efetuando a compra...");
                                                 System.out.println("Tecle para continuar.");
+                                                Carrinho c5 = new Carrinho();
+                                                carrinho2 = c5;
                                                 entrada.nextLine();
                                                 c4.comprar();
                                             }
@@ -146,9 +150,6 @@ public class TesteGeral2 {
                                             }
                                         }
                                     }
-                                    case 0 -> {
-                                        entrada.close();
-                                    }
                                 }
 
                             }
@@ -157,17 +158,17 @@ public class TesteGeral2 {
 
                         case 2 -> { //VENDA
 
-                            while (escolha != 0) {
+                            while (escolha3 != 0) {
 
                                 System.out.println("");
                                 System.out.println("Escolha uma opção: ");
                                 System.out.println("1 - Cadastrar produtos.");
                                 System.out.println("0 - Encerrar cadastro");
 
-                                int escolhaFazer2 = entrada.nextInt();
+                                escolha3 = entrada.nextInt();
                                 entrada.nextLine();
 
-                                switch (escolhaFazer2) {
+                                switch (escolha3) {
 
                                     case 1 -> {
                                         Produto p5 = new Produto();
@@ -196,7 +197,7 @@ public class TesteGeral2 {
                                     }
 
                                     case 0 -> {
-                                        escolha = 1;
+
                                     }
 
 
