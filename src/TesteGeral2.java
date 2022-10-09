@@ -1,8 +1,6 @@
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
-public class TestCliente {
+public class TesteGeral2 {
 
     public static void main(String[] args) throws EmailRepetidoException {
 
@@ -166,10 +164,10 @@ public class TestCliente {
                                 System.out.println("1 - Cadastrar produtos.");
                                 System.out.println("0 - Encerrar cadastro");
 
-                                escolha = entrada.nextInt();
+                                int escolhaFazer2 = entrada.nextInt();
                                 entrada.nextLine();
 
-                                switch (escolha) {
+                                switch (escolhaFazer2) {
 
                                     case 1 -> {
                                         Produto p5 = new Produto();
@@ -198,7 +196,7 @@ public class TestCliente {
                                     }
 
                                     case 0 -> {
-                                        entrada.close();
+                                        escolha = 1;
                                     }
 
 

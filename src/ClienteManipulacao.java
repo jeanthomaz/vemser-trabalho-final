@@ -68,4 +68,9 @@ public class ClienteManipulacao {
             System.out.println("id=" + i + " | " + listaDeClientes.get(i));
         }
     }
+
+    public boolean isEmpty() {
+        return this.listaDeClientes.isEmpty();
+    }
+
 }

@@ -32,4 +32,10 @@ public class CupomManipulacao {
     public Cupom getCupom(int index){
         return listaDeCupons.get(index);
     }
+
+    public boolean isEmpty() {
+        return this.listaDeCupons.isEmpty();
+    }
 }
+
+

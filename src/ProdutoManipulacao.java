@@ -53,4 +53,8 @@ public class ProdutoManipulacao {
     public Produto getProduto(int index){
         return listaDeProdutos.get(index);
     }
+
+    public boolean isEmpty(){
+        return this.listaDeProdutos.isEmpty();
+    }
 }

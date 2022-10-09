@@ -28,4 +28,8 @@ public class CarrinhoManipulacao{
             System.out.println("id=" + i + " | " + listaDeCarrinho.get(i));
         }
     }
+
+    public boolean isEmpty() {
+        return this.listaDeCarrinho.isEmpty();
+    }
 }
