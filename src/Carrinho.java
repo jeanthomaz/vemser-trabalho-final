@@ -18,20 +18,24 @@ public class Carrinho {
         this.cupom = cupom;
     }
 
-    public double getValor(){
+    public double getValor() {
         double a = 1;
         double b = 0;
         double aux;
-        for(int i = 0; i<produtos.size();i++){
+        for (int i = 0; i < produtos.size(); i++) {
             aux = produtos.get(i).getValor() * produtos.get(i).getQuantidade();
             a = aux + b;
             b = a;
         }
-       double valor = b - cupom.getValor();
-       return valor;
+        if (cupom == null) {
+            return b;
+        } else {
+            double valor = b - cupom.getValor();
+            return valor;
+        }
     }
 
-    public void removerProdutos(){
+    public void removerProdutos() {
 
     }
 
