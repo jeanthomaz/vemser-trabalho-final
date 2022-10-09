@@ -1,14 +1,28 @@
+import java.util.HashMap;
+import java.util.Map;
+
 public enum Tipos {
-    JOGOS(1, "jogos"),
-    CONSOLE(2, "console"),
-    COLECIONAVEL(3, "colecionável");
+    JOGOS(1),
+    CONSOLE(2),
+    COLECIONAVEL(3);
 
     private int tipo;
     private String nome;
 
-    Tipos(int tipo, String nome){
+    private static final Map<Integer, Tipos> funcaoPorInt = new HashMap<>();
+
+    static {
+        for (Tipos tipo : Tipos.values()) {
+         funcaoPorInt.put(tipo.getTipo(), tipo);
+        }
+    }
+
+    public static Tipos pegaTipoPorValor(int inteiro) { return funcaoPorInt.get(inteiro);
+
+    }
+
+    Tipos(int tipo){
         this.tipo = tipo;
-        this.nome = nome;
     }
 
     public int getTipo() {

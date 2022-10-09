@@ -7,10 +7,6 @@ public class Main {
 
     public static void main(String[] args) {
 
-
-        List<Produto> listaProdutos = new ArrayList<>();
-
-
         ProdutoManipulacao produtoManipulacao = new ProdutoManipulacao();
         CupomManipulacao cupomManipulacao = new CupomManipulacao();
         CarrinhoManipulacao carrinhoManipulacao = new CarrinhoManipulacao();
@@ -48,19 +44,19 @@ public class Main {
             entrada.nextLine();
             switch (escolha) {
                 case 1 -> {
-                    System.out.println("Escolha seu produto: ");
+                        System.out.println("Escolha seu produto: ");
 
-                    produtoManipulacao.listarProdutos();
+                        produtoManipulacao.listarProdutos();
 
-                    int prod = entrada.nextInt();
+                        int prod = entrada.nextInt();
 
-                    Produto selecionado = produtoManipulacao.getProduto(prod);
+                        Produto selecionado = produtoManipulacao.getProduto(prod);
 
-                    carrinho2.getProdutos().add(selecionado);
+                        carrinho2.getProdutos().add(selecionado);
 
-                    produtoManipulacao.removerProdutoPorIndice(prod);
+                        produtoManipulacao.removerProdutoPorIndice(prod);
 
-                    System.out.println("Produtos adicionados com sucesso.");
+                        System.out.println("Produtos adicionados com sucesso.");
                 }
                 case 2 -> {
                     System.out.println("Selecione seu cupom, caso possua um: ");

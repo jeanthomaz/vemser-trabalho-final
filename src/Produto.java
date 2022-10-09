@@ -6,6 +6,10 @@ public class Produto {
     private String descricao;
     Tipos tipo;
 
+    public Produto(){
+
+    }
+
     public Produto(String nome, long id, int quantidade, double valor, String descricao, Tipos tipo) {
         this.nome = nome;
         this.id = id;
@@ -72,6 +76,7 @@ public class Produto {
     }
 
     public void setTipo(Tipos tipo) {
+
         this.tipo = tipo;
     }
 }

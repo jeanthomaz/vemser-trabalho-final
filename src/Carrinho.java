@@ -23,11 +23,11 @@ public class Carrinho {
         double b = 0;
         double aux;
         for(int i = 0; i<produtos.size();i++){
-            aux = produtos.get(i).getValor();
+            aux = produtos.get(i).getValor() * produtos.get(i).getQuantidade();
             a = aux + b;
             b = a;
         }
-       double valor = b;
+       double valor = b - cupom.getValor();
        return valor;
     }
 

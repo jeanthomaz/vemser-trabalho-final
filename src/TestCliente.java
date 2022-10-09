@@ -6,13 +6,6 @@ public class TestCliente {
 
     public static void main(String[] args) throws EmailRepetidoException {
 
-        //vender
-        // produto2(atributos);
-        // produtoManipulacao.adicionarProduto(p2);
-
-        //
-
-
         boolean teste = false;
         Scanner entrada = new Scanner(System.in);
         ClienteManipulacao clienteManipulacao = new ClienteManipulacao();
@@ -34,12 +27,14 @@ public class TestCliente {
         cupomManipulacao.adicionarCupom(cupom2);
         cupomManipulacao.adicionarCupom(cupom3);
 
-        Cliente c1 = new Cliente("João", "Rua Um", "041.423.678-90", "Porto Alegre", "RS", "(51)99999-91234", "joao@hotmail.com", "joaozinho123", "joao@hotmail.com");
+        Cliente c1 = new Cliente("João", "Rua Um", "041.423.678-90", "Porto Alegre", "RS", "(51)99999-91234", "admin", "admin", "joao@hotmail.com");
         Cliente c2 = new Cliente("João", "Rua Um", "041.423.678-90", "Porto Alegre", "RS", "(51)99999-91234", "joao1@hotmail.com", "joaozinho123", "joao@hotmail.com");
         Cliente c3 = new Cliente("João", "Rua Um", "041.423.678-90", "Porto Alegre", "RS", "(51)99999-91234", "joao2@hotmail.com", "joaozinho123", "joao@hotmail.com");
         clienteManipulacao.adicionarCliente(c1);
         clienteManipulacao.adicionarCliente(c2);
         clienteManipulacao.adicionarCliente(c3);
+
+        Carrinho carrinho2 = new Carrinho();
 
         int escolha = 9;
 
@@ -54,13 +49,17 @@ public class TestCliente {
             entrada.nextLine();
 
             switch (escolha) {
+
                 case 1 -> {
+
                     System.out.println("------BEM VINDO AO LOGIN--------");
                     Cliente c4 = new Cliente();
                     c4 = fazerLogin(entrada, clienteManipulacao);
-                    while(c4 == null){
+
+                    while (c4 == null) {
                         c4 = fazerLogin(entrada, clienteManipulacao);
                     }
+
                     System.out.println("----LOGIN COM SUCESSO----");
                     System.out.println("--------------------------");
                     System.out.println("O que você quer fazer? ");
@@ -70,25 +69,143 @@ public class TestCliente {
                     int escolhaFazer = entrada.nextInt();
                     entrada.nextLine();
 
-                    switch(escolhaFazer) {
+                    switch (escolhaFazer) {
 
-                        case 1 ->{
+                        case 1 -> { // PARTE DA COMPRA
 
-                            //O MAIN.JAVA ENTRA AQUI
+                            while (escolha != 0) {
+
+                                System.out.println("");
+                                System.out.println("Escolha uma opção: ");
+                                System.out.println("1 - Adicionar produtos.");
+                                System.out.println("2 - Adicionar cupom");
+                                System.out.println("3 - Efetuar a compra");
+                                System.out.println("0 - Encerrar carrinho");
+
+                                escolha = entrada.nextInt();
+                                entrada.nextLine();
+                                switch (escolha) {
+                                    case 1 -> {
+                                        if (produtoManipulacao.temProdutos()) {
+                                            System.out.println("Escolha seu produto: ");
+
+                                            produtoManipulacao.listarProdutos();
+
+                                            int prod = entrada.nextInt();
+
+                                            Produto selecionado = produtoManipulacao.getProduto(prod);
+
+                                            carrinho2.getProdutos().add(selecionado);
+
+                                            produtoManipulacao.removerProdutoPorIndice(prod);
+
+                                            System.out.println("Produtos adicionados com sucesso.");
+                                        } else {
+                                            System.out.println("Não possuimos mais produtos! Retornar outro dia");
+                                            escolha = 0;
+                                        }
+                                    }
+                                    case 2 -> {
+                                        System.out.println("Selecione seu cupom, caso possua um: ");
+
+                                        cupomManipulacao.listarCupons();
+
+                                        int ticket = entrada.nextInt();
+
+                                        Cupom selected = cupomManipulacao.getCupom(ticket);
+
+                                        carrinho2.setCupom(selected);
+
+                                        cupomManipulacao.removerCupomPorIndice(ticket);
+                                        System.out.println("Cupom adicionado com sucesso.");
+
+                                    }
+                                    case 3 -> {
+                                        System.out.println("Sua compra foi finalizada com sucesso.");
+                                        System.out.println(carrinho2);
+                                        System.out.println("O valor total de sua compra será de : " + carrinho2.getValor());
+                                        System.out.println("");
+                                        System.out.println("Digite 1 para concluir sua compra e efetuar o pagamento.");
+                                        System.out.println("Digite 2 para cancelar o seu carrinho");
+                                        int c = entrada.nextInt();
+                                        entrada.nextLine();
+
+                                        switch (c) {
+                                            case 1 -> {
+                                                System.out.println("Efetuando a compra...");
+                                                System.out.println("Tecle para continuar.");
+                                                entrada.nextLine();
+                                                c4.comprar();
+                                            }
+                                            case 2 -> {
+
+                                                for (int i = 0; i < carrinho2.getProdutos().size(); i++) {
+                                                    produtoManipulacao.adicionarProduto(carrinho2.getProdutos().get(i));
+                                                }
+                                                cupomManipulacao.adicionarCupom(carrinho2.getCupom());
+                                                Carrinho carrinho3 = new Carrinho();
+                                                carrinho2 = carrinho3;
+                                            }
+                                        }
+                                    }
+                                    case 0 -> {
+                                        entrada.close();
+                                    }
+                                }
+
+                            }
 
                         }
 
-                        case 2 ->{
+                        case 2 -> { //VENDA
+
+                            while (escolha != 0) {
+
+                                System.out.println("");
+                                System.out.println("Escolha uma opção: ");
+                                System.out.println("1 - Cadastrar produtos.");
+                                System.out.println("0 - Encerrar cadastro");
+
+                                escolha = entrada.nextInt();
+                                entrada.nextLine();
+
+                                switch (escolha) {
+
+                                    case 1 -> {
+                                        Produto p5 = new Produto();
+                                        System.out.println("Cadastre seu produto: ");
+                                        System.out.println("Digite o nome: ");
+                                        p5.setNome(entrada.nextLine());
+                                        System.out.println("Digite o ID: ");
+                                        p5.setId(entrada.nextLong());
+                                        entrada.nextLine();
+                                        System.out.println("Digite a quantidade: ");
+                                        p5.setQuantidade(entrada.nextInt());
+                                        entrada.nextLine();
+                                        System.out.println("Digite o valor: ");
+                                        p5.setValor(entrada.nextDouble());
+                                        entrada.nextLine();
+                                        System.out.println("Digite a descrição: ");
+                                        p5.setDescricao(entrada.nextLine());
+                                        System.out.println("Digite o tipo:");
+                                        System.out.println("1 - Jogos ");
+                                        System.out.println("2 - Console");
+                                        System.out.println("3 - Colecionavel");
+                                        p5.setTipo(Tipos.pegaTipoPorValor(entrada.nextInt()));
+                                        produtoManipulacao.adicionarProduto(p5);
+                                        System.out.println("Produto listado com sucesso!");
+                                        c4.vender();
+                                    }
+
+                                    case 0 -> {
+                                        entrada.close();
+                                    }
 
 
-                        }
-
-                        case 0 -> {
-                            entrada.close();
+                                }
+                            }
                         }
                     }
-
-
                 }
 
                 case 2 -> {
@@ -124,7 +241,8 @@ public class TestCliente {
         }
     }
 
-    public static void cadastroEmail (Scanner entrada, ClienteManipulacao clienteManipulacao, Cliente c4, boolean teste) throws EmailRepetidoException {
+
+    public static void cadastroEmail(Scanner entrada, ClienteManipulacao clienteManipulacao, Cliente c4, boolean teste) throws EmailRepetidoException {
         try {
             System.out.println("Digite um Email:");
             c4.setEmail(entrada.nextLine());
@@ -140,7 +258,7 @@ public class TestCliente {
         }
     }
 
-    public static Cliente fazerLogin(Scanner entrada, ClienteManipulacao clienteManipulacao){
+    public static Cliente fazerLogin(Scanner entrada, ClienteManipulacao clienteManipulacao) {
         try {
             System.out.println("Digite o email");
             String email = entrada.nextLine();
@@ -154,17 +272,6 @@ public class TestCliente {
         }
     }
 
-    public static void fazerCadastro () {
-
-    }
-
-    public static void fazerCompra () {
-
-    }
-
-    public static void fazerVenda () {
-
-    }
 }
 
 

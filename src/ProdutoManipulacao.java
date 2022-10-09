@@ -1,6 +1,9 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+
+import static java.util.stream.Collectors.toMap;
 
 public class ProdutoManipulacao {
 
@@ -28,7 +31,13 @@ public class ProdutoManipulacao {
         produtoProcurado.setDescricao(produto.getDescricao());
     }
 
-
+    public boolean temProdutos(){
+        if(listaDeProdutos.size() > 0){
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     public void listarProdutos() {
         for (int i = 0; i < listaDeProdutos.size(); i++) {
