@@ -4,7 +4,7 @@ public class Produto {
     private int quantidade;
     private double valor; //TESTE CRUD VALOR > 0
     private String descricao;
-    Tipos tipo;
+    private Tipos tipo;
 
     public Produto(){
 
