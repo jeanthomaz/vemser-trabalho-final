@@ -17,7 +17,7 @@ public class CarrinhoManipulacao{
         this.listaDeCarrinho.remove(index.intValue());
     }
 
-    public void editarCliente(Integer index, Carrinho carrinho) {
+    public void editarCarrinho(Integer index, Carrinho carrinho) {
         Carrinho carrinhoProcurado = listaDeCarrinho.get(index);
         carrinhoProcurado.setProdutos(carrinho.getProdutos());
         carrinhoProcurado.setCupom(carrinho.getCupom());

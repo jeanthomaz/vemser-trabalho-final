@@ -247,7 +247,6 @@ public class TesteGeral {
             clienteManipulacao.testarEmail(c4.getEmail());
             if (clienteManipulacao.testarEmail(c4.getEmail())) {
                 teste = true;
-                System.out.println("Digite uma senha");
                 return;
             }
         } catch (EmailRepetidoException exception) {
