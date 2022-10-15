@@ -18,7 +18,7 @@ public class UsuarioRepository implements Repositorio<Integer, Usuario> {
         Statement stmt = connection.createStatement();
         ResultSet res = stmt.executeQuery(sql);
 
-        if (res.next()){
+        if (res.next()) {
             return res.getInt("mysequence");
         }
 
@@ -44,12 +44,12 @@ public class UsuarioRepository implements Repositorio<Integer, Usuario> {
             stmt.setString(2, usuario.getPix());
             stmt.setString(3, usuario.getEmail());
             stmt.setString(4, usuario.getSenha());
-            stmt.setString(5,usuario.getNome());
+            stmt.setString(5, usuario.getNome());
             stmt.setString(6, usuario.getEndereco());
             stmt.setInt(7, usuario.getCpf());
             stmt.setString(8, usuario.getCidade());
             stmt.setString(9, usuario.getEstado());
-            stmt.setInt(10,usuario.getTelefone());
+            stmt.setInt(10, usuario.getTelefone());
 
             int res = stmt.executeUpdate();
             System.out.println("adicionarUsuario.res=" + res);
@@ -122,12 +122,12 @@ public class UsuarioRepository implements Repositorio<Integer, Usuario> {
             stmt.setString(2, usuario.getPix());
             stmt.setString(3, usuario.getEmail());
             stmt.setString(4, usuario.getSenha());
-            stmt.setString(5,usuario.getNome());
+            stmt.setString(5, usuario.getNome());
             stmt.setString(6, usuario.getEndereco());
             stmt.setInt(7, usuario.getCpf());
             stmt.setString(8, usuario.getCidade());
             stmt.setString(9, usuario.getEstado());
-            stmt.setInt(10,usuario.getTelefone());
+            stmt.setInt(10, usuario.getTelefone());
 
             // Executa-se a consulta
             int res = stmt.executeUpdate();
@@ -146,7 +146,6 @@ public class UsuarioRepository implements Repositorio<Integer, Usuario> {
             }
         }
     }
-
 
     @Override
     public List<Usuario> listar() throws BancoDeDadosException {
@@ -186,5 +185,89 @@ public class UsuarioRepository implements Repositorio<Integer, Usuario> {
             }
         }
         return usuarios;
+    }
+
+    public boolean findByEmail(Usuario usuario) throws BancoDeDadosException{
+        List<Usuario> lista = new ArrayList<>();
+        Connection con = null;
+        boolean existe = false;
+        try {
+            con = ConexaoBancoDeDados.getConnection();
+            Statement stmt = con.createStatement();
+
+            String sql = "SELECT * FROM USUARIO" +
+                    " WHERE EMAIL = ?";
+            // Executa-se a consulta
+            ResultSet res = stmt.executeQuery(sql);
+            res.next();
+            existe = res.getString("email").isEmpty();
+        } catch (SQLException e) {
+            throw new BancoDeDadosException(e.getCause());
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return existe;
+    }
+
+    public boolean findByPix(Usuario usuario) throws BancoDeDadosException{
+        List<Usuario> lista = new ArrayList<>();
+        Connection con = null;
+        boolean existe = false;
+        try {
+            con = ConexaoBancoDeDados.getConnection();
+            Statement stmt = con.createStatement();
+
+            String sql = "SELECT * FROM USUARIO" +
+                    " WHERE PIX = ?";
+            // Executa-se a consulta
+            ResultSet res = stmt.executeQuery(sql);
+            res.next();
+            existe = res.getString("pix").isEmpty();
+        } catch (SQLException e) {
+            throw new BancoDeDadosException(e.getCause());
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return existe;
+    }
+
+    public boolean findByCPF(Usuario usuario) throws BancoDeDadosException{
+        List<Usuario> lista = new ArrayList<>();
+        Connection con = null;
+        boolean existe = false;
+        try {
+            con = ConexaoBancoDeDados.getConnection();
+            Statement stmt = con.createStatement();
+
+            String sql = "SELECT * FROM USUARIO" +
+                    " WHERE CPF = ?";
+            // Executa-se a consulta
+            ResultSet res = stmt.executeQuery(sql);
+            res.next();
+            existe = res.getString("cpf").isEmpty();
+        } catch (SQLException e) {
+            throw new BancoDeDadosException(e.getCause());
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return existe;
     }
 }

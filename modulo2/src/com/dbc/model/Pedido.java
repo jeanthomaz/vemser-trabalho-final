@@ -5,8 +5,8 @@ import java.util.List;
 
 public class Pedido {
 
-    Produto produto;
-    Cupom cupom;
+    private List<Produto> produtos;
+    private Cupom cupom;
 
     private int idPedido;
     private int idCupom;
@@ -24,41 +24,40 @@ public class Pedido {
         this.valorFinal = valorFinal;
     }
 
-//    public double getValor() {
-//        if (produtos.size() > 0) {
-//            double a = 1;
-//            double b = 0;
-//            double aux;
-//            for (int i = 0; i < produtos.size(); i++) {
-//                aux = produtos.get(i).getValor() * produtos.get(i).getQuantidade();
-//                a = aux + b;
-//                b = a;
-//            }
-//            if (cupom == null) {
-//                return b;
-//            } else {
-//                double valor = b - cupom.getValor();
-//                return valor;
-//            }
-//        } else {
-//           return 0;
-//        }
-//    }
-
-    public double getValor(Produto produto, Cupom cupom) {
-        if (produto.getValor() > 0 && cupom.getValidade() == "1") {
-            double valorProduto = produto.getValor() * produto.getQuantidade() - cupom.getValor();
-        }
-            else if (produto.getValor() > 0 && cupom.getValidade() == "0") {
-            double valorProduto = produto.getValor() * produto.getQuantidade();
-        } else {
-            double valorProduto = 0;
-        }
-        return 0;
+    @Override
+    public String toString() {
+        return "Pedido{" +
+                "produtos=" + produtos +
+                ", cupom=" + cupom +
+                ", idPedido=" + idPedido +
+                ", idCupom=" + idCupom +
+                ", idUsuario=" + idUsuario +
+                ", valorFinal=" + valorFinal +
+                '}';
     }
 
-    public void removerProdutos() {
+    public List<Produto> getProdutos() {
+        return produtos;
+    }
 
+    public void setProdutos(List<Produto> produtos) {
+        this.produtos = produtos;
+    }
+
+    public Cupom getCupom() {
+        return cupom;
+    }
+
+    public void setCupom(Cupom cupom) {
+        this.cupom = cupom;
+    }
+
+    public int getIdPedido() {
+        return idPedido;
+    }
+
+    public void setIdPedido(int idPedido) {
+        this.idPedido = idPedido;
     }
 
     public int getIdCupom() {
@@ -85,23 +84,20 @@ public class Pedido {
         this.valorFinal = valorFinal;
     }
 
-    public int getIdPedido() {
-        return idPedido;
-    }
-
-    public void setIdPedido(int idPedido) {
-        this.idPedido = idPedido;
-    }
-
-    @Override
-    public String toString() {
-        return "Pedido{" +
-                "produto=" + produto +
-                ", cupom=" + cupom +
-                ", idPedido=" + idPedido +
-                ", idCupom=" + idCupom +
-                ", idUsuario=" + idUsuario +
-                ", valorFinal=" + valorFinal +
-                '}';
+    public double getValorFinal(Produto produto, Cupom cupom) {
+        if (produtos.size() > 0) {
+            double aux = 0;
+            for (Produto value : produtos) {
+                aux += value.getValor() * value.getQuantidade();
+                if (cupom.getValidade() == "1") {
+                    double valorFinal = aux - cupom.getValor();
+                } else if (cupom.getValidade() == "0") {
+                    double valorFinal = aux;
+                } else {
+                    double valorFinal = 0;
+                }
+            }
+        }
+        return 0;
     }
 }
