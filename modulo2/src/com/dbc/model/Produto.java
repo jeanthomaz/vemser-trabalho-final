@@ -97,6 +97,8 @@ public class Produto {
         this.idUsuario = idUsuario;
     }
 
+    //Não utilizado
     public Usuario getUsuario() {
+        return usuario;
     }
 }

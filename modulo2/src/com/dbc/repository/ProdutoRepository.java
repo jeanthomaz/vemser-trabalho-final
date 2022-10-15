@@ -47,7 +47,7 @@ public class ProdutoRepository implements Repositorio<Integer, Produto> {
             stmt.setString(2,produto.getNome());
             stmt.setString(3,produto.getDescricao());
             stmt.setInt(4,produto.getQuantidade());
-            stmt.setInt(5,produto.getTipo());
+            stmt.setInt(5,produto.getTipo().getTipos());
             stmt.setDouble(6,produto.getValor());
             stmt.setInt(7,produto.getIdUsuario());
 
@@ -119,7 +119,7 @@ public class ProdutoRepository implements Repositorio<Integer, Produto> {
             stmt.setString(2,produto.getNome());
             stmt.setString(3,produto.getDescricao());
             stmt.setInt(4,produto.getQuantidade());
-            stmt.setInt(5,produto.getTipo());
+            stmt.setInt(5,produto.getTipo().getTipos());
             stmt.setDouble(6,produto.getValor());
             stmt.setInt(7,produto.getIdUsuario());
 
