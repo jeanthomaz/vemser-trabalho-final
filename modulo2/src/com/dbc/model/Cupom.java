@@ -4,9 +4,14 @@ public class Cupom {
 
     private int idCupom;
     private double valor; //TESTE CRUD VALOR > 0
-    private boolean validade; //TESTE CRUD BOOLEAN VALIDO
+    private String validade; //TESTE CRUD BOOLEAN VALIDO
 
-    public Cupom(double valor, boolean validade) {
+
+    public Cupom(){
+
+    }
+
+    public Cupom(double valor, String validade) {
         this.valor = valor;
         this.validade = validade;
     }
@@ -40,11 +45,11 @@ public class Cupom {
         this.valor = valor;
     }
 
-    public boolean isValidade() {
+    public String getValidade() {
         return validade;
     }
 
-    public void setValidade(boolean validade) {
+    public void setValidade(String validade) {
         this.validade = validade;
     }
 }

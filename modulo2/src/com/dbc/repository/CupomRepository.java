@@ -39,8 +39,8 @@ public class CupomRepository implements Repositorio<Integer, Cupom> {
             PreparedStatement stmt = con.prepareStatement(sql);
 
             stmt.setInt(1, cupom.getIdCupom());
-            stmt.setString(2, cupom.getValor());
-            stmt.setString(3, cupom.isValidade());
+            stmt.setDouble(2, cupom.getValor());
+            stmt.setString(3, cupom.getValidade());
 
             int res = stmt.executeUpdate();
             System.out.println("adicionarCupom.res=" + res);
@@ -103,7 +103,7 @@ public class CupomRepository implements Repositorio<Integer, Cupom> {
 
             stmt.setInt(1, cupom.getIdCupom());
             stmt.setDouble(2, cupom.getValor());
-            stmt.setBoolean(3, cupom.isValidade());
+            stmt.setString(3, cupom.getValidade());
 
             // Executa-se a consulta
             int res = stmt.executeUpdate();
@@ -140,7 +140,7 @@ public class CupomRepository implements Repositorio<Integer, Cupom> {
             while (res.next()) {
                 Cupom cupom = new Cupom();
                 cupom.setIdCupom(res.getInt("ID_CUPOM"));
-                cupom.setValor(res.getString("VALOR"));
+                cupom.setValor(res.getDouble("VALOR"));
                 cupom.setValidade(res.getString("VALIDADE"));
                 cupons.add(cupom);
             }

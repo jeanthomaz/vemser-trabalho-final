@@ -1,7 +1,8 @@
 package com.dbc.repository;
 
-import com.dbc.exceptions.BancoDeDadosException;
+import com.dbc.exceptions.*;
 import com.dbc.model.Pedido;
+import com.dbc.model.Cupom;
 
 import java.sql.*;
 import java.sql.SQLException;
@@ -39,9 +40,9 @@ public class PedidoRepository implements Repositorio<Integer, Pedido> {
             PreparedStatement stmt = con.prepareStatement(sql);
 
             stmt.setInt(1, pedido.getIdPedido());
-            stmt.setString(2, pedido.getIdCupom());
-            stmt.setString(3, pedido.getIdUsuario());
-            stmt.setString(3, pedido.getValorFinal());
+            stmt.setInt(2, pedido.getIdCupom());
+            stmt.setInt(3, pedido.getIdUsuario());
+            stmt.setDouble(3, pedido.getValorFinal());
 
             int res = stmt.executeUpdate();
             System.out.println("adicionarPedido.res=" + res);
@@ -104,8 +105,8 @@ public class PedidoRepository implements Repositorio<Integer, Pedido> {
             PreparedStatement stmt = con.prepareStatement(sql.toString());
 
             stmt.setInt(1, pedido.getIdCupom());
-            stmt.setString(2, pedido.getIdUsuario());
-            stmt.setString(3, pedido.getValorFinal());
+            stmt.setInt(2, pedido.getIdUsuario());
+            stmt.setDouble(3, pedido.getValorFinal());
 
             // Executa-se a consulta
             int res = stmt.executeUpdate();
@@ -140,7 +141,7 @@ public class PedidoRepository implements Repositorio<Integer, Pedido> {
             ResultSet res = stmt.executeQuery(sql);
 
             while (res.next()) {
-                Pedido pedido = new Cupom();
+                Pedido pedido = new Pedido();
                 pedido.setIdPedido(res.getInt("ID_PEDIDO"));
                 pedido.setIdCupom(res.getInt("ID_CUPOM"));
                 pedido.setIdUsuario(res.getInt("ID_USUARIO"));

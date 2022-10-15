@@ -5,6 +5,9 @@ import java.util.List;
 
 public class Pedido {
 
+    Produto produto;
+    Cupom cupom;
+
     private int idPedido;
     private int idCupom;
     private int idUsuario;
@@ -21,25 +24,37 @@ public class Pedido {
         this.valorFinal = valorFinal;
     }
 
-    public double getValor() {
-        if (produtos.size() > 0) {
-            double a = 1;
-            double b = 0;
-            double aux;
-            for (int i = 0; i < produtos.size(); i++) {
-                aux = produtos.get(i).getValor() * produtos.get(i).getQuantidade();
-                a = aux + b;
-                b = a;
-            }
-            if (cupom == null) {
-                return b;
-            } else {
-                double valor = b - cupom.getValor();
-                return valor;
-            }
-        } else {
-           return 0;
+//    public double getValor() {
+//        if (produtos.size() > 0) {
+//            double a = 1;
+//            double b = 0;
+//            double aux;
+//            for (int i = 0; i < produtos.size(); i++) {
+//                aux = produtos.get(i).getValor() * produtos.get(i).getQuantidade();
+//                a = aux + b;
+//                b = a;
+//            }
+//            if (cupom == null) {
+//                return b;
+//            } else {
+//                double valor = b - cupom.getValor();
+//                return valor;
+//            }
+//        } else {
+//           return 0;
+//        }
+//    }
+
+    public double getValor(Produto produto, Cupom cupom) {
+        if (produto.getValor() > 0 && cupom.getValidade() == "1") {
+            double valorProduto = produto.getValor() * produto.getQuantidade() - cupom.getValor();
         }
+            else if (produto.getValor() > 0 && cupom.getValidade() == "0") {
+            double valorProduto = produto.getValor() * produto.getQuantidade();
+        } else {
+            double valorProduto = 0;
+        }
+        return 0;
     }
 
     public void removerProdutos() {
@@ -81,10 +96,12 @@ public class Pedido {
     @Override
     public String toString() {
         return "Pedido{" +
-                "idPedido=" + idPedido +
-                ", produtos=" + produtos +
-                ", cupons=" + cupons +
+                "produto=" + produto +
                 ", cupom=" + cupom +
+                ", idPedido=" + idPedido +
+                ", idCupom=" + idCupom +
+                ", idUsuario=" + idUsuario +
+                ", valorFinal=" + valorFinal +
                 '}';
     }
 }
