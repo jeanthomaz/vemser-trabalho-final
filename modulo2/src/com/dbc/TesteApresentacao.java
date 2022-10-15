@@ -2,7 +2,7 @@ package com.dbc;
 
 import com.dbc.enums.Tipos;
 import com.dbc.exceptions.EmailRepetidoException;
-import com.dbc.model.Produto_Cliente;
+import com.dbc.model.Pedido;
 import com.dbc.model.Usuario;
 import com.dbc.model.Cupom;
 import com.dbc.model.Produto;
@@ -41,7 +41,7 @@ public class TesteApresentacao {
         clienteManipulacao.adicionarCliente(c2);
         clienteManipulacao.adicionarCliente(c3);
 
-        Produto_Cliente produtoCliente2 = new Produto_Cliente();
+        Pedido produtoCliente2 = new Pedido();
 
         int escolha = 9;
         int escolhaFazer = 9;
@@ -143,7 +143,7 @@ public class TesteApresentacao {
                                             case 1 -> {
                                                 System.out.println("Efetuando a compra...");
                                                 System.out.println("Tecle para continuar.");
-                                                Produto_Cliente c5 = new Produto_Cliente();
+                                                Pedido c5 = new Pedido();
                                                 produtoCliente2 = c5;
                                                 entrada.nextLine();
                                                 c4.comprar();
@@ -154,7 +154,7 @@ public class TesteApresentacao {
                                                     produtoManipulacao.adicionarProduto(produtoCliente2.getProdutos().get(i));
                                                 }
                                                 cupomManipulacao.adicionarCupom(produtoCliente2.getCupom());
-                                                Produto_Cliente produtoCliente3 = new Produto_Cliente();
+                                                Pedido produtoCliente3 = new Pedido();
                                                 produtoCliente2 = produtoCliente3;
                                             }
                                         }

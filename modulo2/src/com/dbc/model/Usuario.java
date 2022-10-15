@@ -2,6 +2,7 @@ package com.dbc.model;
 
 public class Usuario implements Comprar, Vender {
 
+    private Integer idUsuario;
     private String email;
     private String senha;
 
@@ -9,10 +10,10 @@ public class Usuario implements Comprar, Vender {
 
     private String nome;
     private String endereco;
-    private String cpf;
+    private Integer cpf;
     private String cidade;
     private String estado;
-    private String telefone;
+    private Integer telefone;
 
     Usuario usuario;
 
@@ -20,7 +21,8 @@ public class Usuario implements Comprar, Vender {
 
     }
 
-    public Usuario(String email, String senha, String pix, String nome, String endereco, String cpf, String cidade, String estado, String telefone, Usuario usuario) {
+    public Usuario(Integer id, String email, String senha, String pix, String nome, String endereco, Integer cpf, String cidade, String estado, Integer telefone, Usuario usuario) {
+        this.idUsuario = id;
         this.email = email;
         this.senha = senha;
         this.pix = pix;
@@ -80,11 +82,11 @@ public class Usuario implements Comprar, Vender {
         this.endereco = endereco;
     }
 
-    public String getCpf() {
+    public Integer getCpf() {
         return cpf;
     }
 
-    public void setCpf(String cpf) {
+    public void setCpf(Integer cpf) {
         this.cpf = cpf;
     }
 
@@ -104,11 +106,11 @@ public class Usuario implements Comprar, Vender {
         this.estado = estado;
     }
 
-    public String getTelefone() {
+    public Integer getTelefone() {
         return telefone;
     }
 
-    public void setTelefone(String telefone) {
+    public void setTelefone(Integer telefone) {
         this.telefone = telefone;
     }
 
@@ -124,9 +126,6 @@ public class Usuario implements Comprar, Vender {
         this.senha = senha;
     }
 
-    public void formaPag(Usuario usuario, String pix) {
-        usuario.getPix();
-    }
 
     public String getPix() {
         return pix;
@@ -135,6 +134,16 @@ public class Usuario implements Comprar, Vender {
     public void setPix(String pix) {
         this.pix = pix;
     }
+
+    public Integer getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(Integer idUsuario) {
+        this.idUsuario = idUsuario;
+    }
 }
+
+
 
 

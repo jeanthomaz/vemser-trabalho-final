@@ -3,36 +3,50 @@ package com.dbc.model;
 import com.dbc.enums.Tipos;
 
 public class Produto {
+
+    private Integer idProduto;
     private String nome;
-    private long id; //TESTE CRUD ID ÚNICO
-    private int quantidade;
-    private double valor; //TESTE CRUD VALOR > 0
     private String descricao;
+    private int quantidade;
     private Tipos tipo;
+    private double valor;
+    private int idUsuario;
+
+    Usuario usuario;
 
     public Produto(){
 
     }
 
-    public Produto(String nome, long id, int quantidade, double valor, String descricao, Tipos tipo) {
+    public Produto(Integer idProduto, String nome, String descricao, int quantidade, Tipos tipo, double valor, int idUsuario) {
+        this.idProduto = idProduto;
         this.nome = nome;
-        this.id = id;
-        this.quantidade = quantidade;
-        this.valor = valor;
         this.descricao = descricao;
+        this.quantidade = quantidade;
         this.tipo = tipo;
+        this.valor = valor;
+        this.idUsuario = idUsuario;
     }
 
     @Override
     public String toString() {
-        return "com.dbc.model.Produto{" +
-                "nome='" + nome + '\'' +
-                ", id=" + id +
-                ", quantidade=" + quantidade +
-                ", valor=" + valor +
+        return "Produto{" +
+                "idProduto=" + idProduto +
+                ", nome='" + nome + '\'' +
                 ", descricao='" + descricao + '\'' +
+                ", quantidade=" + quantidade +
                 ", tipo=" + tipo +
+                ", valor=" + valor +
+                ", idUsuario=" + idUsuario +
                 '}';
+    }
+
+    public Integer getIdProduto() {
+        return idProduto;
+    }
+
+    public void setIdProduto(Integer idProduto) {
+        this.idProduto = idProduto;
     }
 
     public String getNome() {
@@ -43,12 +57,12 @@ public class Produto {
         this.nome = nome;
     }
 
-    public long getId() {
-        return id;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public int getQuantidade() {
@@ -59,6 +73,14 @@ public class Produto {
         this.quantidade = quantidade;
     }
 
+    public Tipos getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(Tipos tipo) {
+        this.tipo = tipo;
+    }
+
     public double getValor() {
         return valor;
     }
@@ -67,20 +89,14 @@ public class Produto {
         this.valor = valor;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public int getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
-    public Tipos getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(Tipos tipo) {
-
-        this.tipo = tipo;
+    public Usuario getUsuario() {
     }
 }

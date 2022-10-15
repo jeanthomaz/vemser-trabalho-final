@@ -2,6 +2,7 @@ package com.dbc.model;
 
 public class Cupom {
 
+    private int idCupom;
     private double valor; //TESTE CRUD VALOR > 0
     private boolean validade; //TESTE CRUD BOOLEAN VALIDO
 
@@ -21,6 +22,14 @@ public class Cupom {
                 "valor=" + valor +
                 ", validade=" + validade +
                 '}';
+    }
+
+    public int getIdCupom() {
+        return idCupom;
+    }
+
+    public void setIdCupom(int idCupom) {
+        this.idCupom = idCupom;
     }
 
     public double getValor() {
