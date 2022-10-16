@@ -4,9 +4,6 @@ import com.dbc.exceptions.*;
 import com.dbc.model.Usuario;
 import com.dbc.repository.UsuarioRepository;
 
-import java.util.List;
-import java.util.Optional;
-
 public class UsuarioService {
     private UsuarioRepository usuarioRepository;
 
@@ -64,19 +61,38 @@ public class UsuarioService {
         }
     }
 
-    public Usuario fazerLogin (String email, String senha) throws EmailRepetidoException, BancoDeDadosException {
-        Usuario usuario = new Usuario();
-        usuario.setEmail(email);
-        usuario.setSenha(senha);
-        if (usuarioRepository.findByEmail(usuario)) {
-            if (usuarioRepository.findBySenha(usuario)) {
-                return usuario;
+//    public Usuario fazerLogin (String email, String senha) throws EmailRepetidoException, BancoDeDadosException {
+//        Usuario usuario = new Usuario();
+//        usuario.setEmail(email);
+//        usuario.setSenha(senha);
+//        if (usuarioRepository.findByEmail(usuario)) {
+//            if (usuarioRepository.findBySenha(usuario)) {
+//                return usuario;
+//            } else {
+//                throw new EmailRepetidoException("Senha não existente, digitar novamente");
+//            }
+//        }
+//        else {
+//            throw new EmailRepetidoException("E-mail não existente, digitar novamente");
+//        }
+//    }
+    public Usuario fazerLogin(Usuario usuario){
+        try {
+            if(usuario.getEmail() != null && usuarioRepository.findByEmail(usuario)){
+                if(usuario.getSenha() != null && usuarioRepository.findBySenha(usuario)){
+                    return usuarioRepository.selecionarUsuario(usuario);
+                } else{
+                    throw new Exception("Senha inválida!");
+                }
             } else {
-                throw new EmailRepetidoException("Senha não existente, digitar novamente");
+                throw new Exception("Email inválido!");
             }
+        } catch (BancoDeDadosException e){
+            e.printStackTrace();
+        } catch (Exception e){
+            System.out.println("ERRO: " + e.getMessage());
         }
-        else {
-            throw new EmailRepetidoException("E-mail não existente, digitar novamente");
-        }
+
+        return usuario;
     }
 }

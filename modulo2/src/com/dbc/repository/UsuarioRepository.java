@@ -306,4 +306,33 @@ public class UsuarioRepository implements Repositorio<Integer, Usuario> {
         }
         return existe;
     }
+
+    public Usuario selecionarUsuario(Usuario usuario) throws BancoDeDadosException {
+        List<Usuario> lista = new ArrayList<>();
+        Connection con = null;
+        boolean existe = false;
+        try {
+            con = ConexaoBancoDeDados.getConnection();
+            Statement stmt = con.createStatement();
+
+            String sql = "SELECT * FROM USUARIO" +
+                    " WHERE EMAIL = ? AND SENHA = ?";
+
+            //Executa-se a consulta
+            ResultSet res = stmt.executeQuery(sql);
+            res.next();
+            existe = res.getString("email").isEmpty();
+        } catch (SQLException e){
+            throw new BancoDeDadosException(e.getCause());
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return usuario;
+    }
 }

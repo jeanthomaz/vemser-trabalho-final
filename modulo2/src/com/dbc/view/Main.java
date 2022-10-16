@@ -1,14 +1,10 @@
 package com.dbc.view;
 
 import com.dbc.enums.Tipos;
-import com.dbc.model.Pedido;
-import com.dbc.model.Produto;
-import com.dbc.model.Usuario;
-import com.dbc.model.Cupom;
+import com.dbc.model.*;
 import com.dbc.exceptions.*;
 
-import com.dbc.repository.PedidoRepository;
-import com.dbc.repository.UsuarioRepository;
+import com.dbc.repository.*;
 import com.dbc.service.*;
 
 import java.util.InputMismatchException;
@@ -241,18 +237,12 @@ public class Main {
     }
 }
 
-    public static Usuario fazerLogin(Scanner entrada, UsuarioService usuarioService) throws BancoDeDadosException {
-        try {
-            System.out.println("Digite o email");
-            String email = entrada.nextLine();
-            System.out.println("Digite uma senha");
-            String senha = entrada.nextLine();
-            return usuarioService.fazerLogin(email, senha);
-        } catch (EmailRepetidoException e) {
-            e.printStackTrace();
-            System.err.println(e.getMessage());
-            return null;
-        }
+    public static Usuario fazerLogin(Scanner entrada, Usuario usuario, UsuarioService usuarioService) throws EmailRepetidoException {
+        System.out.println("Digite o email");
+        String email = entrada.nextLine();
+        System.out.println("Digite uma senha");
+        String senha = entrada.nextLine();
+        return usuarioService.fazerLogin(usuario);
     }
 }
 
