@@ -10,10 +10,10 @@ public class Usuario {
 
     private String nome;
     private String endereco;
-    private Integer cpf;
+    private String cpf;
     private String cidade;
     private String estado;
-    private Integer telefone;
+    private String telefone;
 
     private String deletado;
 
@@ -21,7 +21,7 @@ public class Usuario {
 
     }
 
-    public Usuario(Integer id, String email, String senha, String pix, String nome, String endereco, Integer cpf, String cidade, String estado, Integer telefone, String deletado) {
+    public Usuario(Integer id, String email, String senha, String pix, String nome, String endereco, String cpf, String cidade, String estado, String telefone) {
         this.idUsuario = id;
         this.email = email;
         this.senha = senha;
@@ -32,7 +32,7 @@ public class Usuario {
         this.cidade = cidade;
         this.estado = estado;
         this.telefone = telefone;
-        this.deletado = deletado;
+        this.setDeletado("F");
     }
 
     public String getDeletado() {
@@ -70,6 +70,18 @@ public class Usuario {
 
     public String getEmail() {return email;}
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
     public String getNome() {
         return nome;
     }
@@ -86,11 +98,11 @@ public class Usuario {
         this.endereco = endereco;
     }
 
-    public Integer getCpf() {
+    public String getCpf() {
         return cpf;
     }
 
-    public void setCpf(Integer cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 
@@ -110,26 +122,13 @@ public class Usuario {
         this.estado = estado;
     }
 
-    public Integer getTelefone() {
+    public String getTelefone() {
         return telefone;
     }
 
-    public void setTelefone(Integer telefone) {
+    public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
 
     public String getPix() {
         return pix;

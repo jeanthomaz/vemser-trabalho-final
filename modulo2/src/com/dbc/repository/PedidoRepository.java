@@ -12,7 +12,7 @@ import java.util.List;
 public class PedidoRepository implements Repositorio<Integer, Pedido> {
     @Override
     public Integer getProximoId(Connection connection) throws SQLException {
-        String sql = "SELECT POKE_STORE.SEQ_PEDIDO.nextval mysequence from DUAL";
+        String sql = "SELECT SEQ_PEDIDO.nextval mysequence from DUAL";
 
         Statement stmt = connection.createStatement();
         ResultSet res = stmt.executeQuery(sql);
@@ -67,8 +67,8 @@ public class PedidoRepository implements Repositorio<Integer, Pedido> {
             con = ConexaoBancoDeDados.getConnection();
 
             String sql = "UPDATE PEDIDO \n" +
-                    "SET DELETADO = 'T'\n" +
-                    "WHERE ID_PEDIDO = ?";
+                    " SET DELETADO = 'T'\n" +
+                    " WHERE ID_PEDIDO = ?";
 
             PreparedStatement stmt = con.prepareStatement(sql);
 
@@ -137,20 +137,19 @@ public class PedidoRepository implements Repositorio<Integer, Pedido> {
             con = ConexaoBancoDeDados.getConnection();
             Statement stmt = con.createStatement();
 
-            String sql = "SELECT * FROM PEDIDO";
+            String sql = "SELECT * FROM PEDIDO" +
+                    " WHERE DELETADO = 'F'";
 
             // Executa-se a consulta
             ResultSet res = stmt.executeQuery(sql);
 
             while (res.next()) {
                 Pedido pedido = new Pedido();
-                if(pedido.getDeletado().equals("F")) {
                     pedido.setIdPedido(res.getInt("ID_PEDIDO"));
                     pedido.setIdCupom(res.getInt("ID_CUPOM"));
                     pedido.setIdUsuario(res.getInt("ID_USUARIO"));
                     pedido.setValorFinal(res.getDouble("VALOR_FINAL"));
                     pedidos.add(pedido);
-                }
             }
         } catch (SQLException e) {
             throw new BancoDeDadosException(e.getCause());

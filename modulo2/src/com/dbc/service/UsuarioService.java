@@ -4,7 +4,8 @@ import com.dbc.exceptions.*;
 import com.dbc.model.Usuario;
 import com.dbc.repository.UsuarioRepository;
 
-import java.util.Optional;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UsuarioService {
     private UsuarioRepository usuarioRepository;
@@ -16,7 +17,7 @@ public class UsuarioService {
     // criação de um objeto
     public void adicionarUsuario(Usuario usuario) {
         try {
-            if (usuario.getCidade().length() != 11) {
+            if (usuario.getCpf().length() != 11) {
                 throw new Exception("CPF Inválido!");
             } else if (usuario.getEmail() != null && usuarioRepository.findByEmail(usuario)) {
                 throw new Exception("Email já cadastrado!");
@@ -57,9 +58,10 @@ public class UsuarioService {
     // leitura
     public void listar() {
         try {
-            usuarioRepository.listar().forEach(System.out::println);
+            List<Usuario> usuarios = usuarioRepository.listar();
+            usuarios.forEach(System.out::println);
         } catch (BancoDeDadosException e) {
-            e.printStackTrace();
+           throw new RuntimeException(e.getCause());
         }
     }
 
@@ -95,7 +97,7 @@ public class UsuarioService {
 //        }
         public Usuario verificarUsuario (Usuario usuario) {
         try {
-            return usuarioRepository.login(usuario);
+            return usuarioRepository.pegarLogin(usuario);
         } catch (BancoDeDadosException e) {
             System.out.println("ERRO: " + e.getMessage());
             e.printStackTrace();

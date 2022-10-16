@@ -54,7 +54,7 @@ public class CupomService {
             List<Cupom> listar = cupomRepository.listar();
             listar.forEach(System.out::println);
         } catch (BancoDeDadosException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e.getCause());
         }
     }
 }

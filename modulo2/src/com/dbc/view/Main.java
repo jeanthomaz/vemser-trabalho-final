@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) throws BancoDeDadosException {
+    public static void main(String[] args){
 
         Scanner scanner = new Scanner(System.in);
 
@@ -23,7 +23,8 @@ public class Main {
 
         //EDITAR DAQUI PRA BAIXO ///
 
-
+       usuarioService.listar();
+        pedidoService.listarPedido();
 
         int opcao = -1;
         int escolha = 9;
@@ -51,7 +52,7 @@ public class Main {
                     user.setEndereco(scanner.nextLine());
 
                     System.out.println("Digite o seu CPF: ");
-                    user.setCpf(scanner.nextInt());
+                    user.setCpf(scanner.nextLine());
 
                     System.out.println("Digite sua cidade: ");
                     user.setCidade(scanner.nextLine());
@@ -60,7 +61,7 @@ public class Main {
                     user.setEstado(scanner.nextLine());
 
                     System.out.println("Digite seu telefone: ");
-                    user.setTelefone(scanner.nextInt());
+                    user.setTelefone(scanner.nextLine());
 
                     System.out.println("Digite seu email: ");
                     user.setEmail(scanner.nextLine());
@@ -89,7 +90,7 @@ public class Main {
                     newUser.setEndereco(scanner.nextLine());
 
                     System.out.println("Digite o seu CPF: ");
-                    newUser.setCpf(scanner.nextInt());
+                    newUser.setCpf(scanner.nextLine());
 
                     System.out.println("Digite sua cidade: ");
                     newUser.setCidade(scanner.nextLine());
@@ -98,7 +99,7 @@ public class Main {
                     newUser.setEstado(scanner.nextLine());
 
                     System.out.println("Digite seu telefone: ");
-                    newUser.setTelefone(scanner.nextInt());
+                    newUser.setTelefone(scanner.nextLine());
 
                     System.out.println("Digite seu email: ");
                     newUser.setEmail(scanner.nextLine());
@@ -248,7 +249,6 @@ public class Main {
                 if (usuarioEncontrado.getEmail() != null && usuarioEncontrado.getSenha() != null) {
                     System.out.println("\n"+usuario.getEmail() + " Logado com sucesso!");
                     resultadoUser = usuarioEncontrado;
-                    a = false;
                 }
             }
         }catch (Exception ex){

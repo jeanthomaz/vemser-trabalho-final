@@ -15,7 +15,7 @@ public class ProdutoRepository implements Repositorio<Integer, Produto> {
     @Override
     public Integer getProximoId(Connection connection) throws BancoDeDadosException {
         try {
-            String sql = "SELECT POKE_STORE.SEQ_PRODUTO.nextval mysequence from DUAL";
+            String sql = "SELECT SEQ_PRODUTO.nextval mysequence from DUAL";
             Statement stmt = connection.createStatement();
             ResultSet res = stmt.executeQuery(sql);
 
@@ -157,7 +157,7 @@ public class ProdutoRepository implements Repositorio<Integer, Produto> {
             Statement stmt = con.createStatement();
 
             String sql = "SELECT * FROM PRODUTO" +
-                    "WHERE DELETADO = 'F' ";
+                    " WHERE DELETADO = 'F' ";
 
             // Executa-se a consulta
             ResultSet res = stmt.executeQuery(sql);
@@ -168,7 +168,7 @@ public class ProdutoRepository implements Repositorio<Integer, Produto> {
                 produto.setNome(res.getString("NOME"));
                 produto.setDescricao(res.getString("DESCRICAO"));
                 produto.setQuantidade(res.getInt("QUANTIDADE"));
-                produto.setTipo(Tipos.valueOf(res.getString("TIPO")));
+//                produto.setTipo(Tipos.ofTipo(res.getString("TIPO")));
                 produto.setValor(res.getDouble("VALOR"));
                 produto.setIdUsuario(res.getInt("ID_USUARIO"));
                 produto.setDeletado(res.getString("DELETADO" ));

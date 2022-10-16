@@ -12,9 +12,10 @@ public class Cupom {
 
     }
 
-    public Cupom(double valor, String validade) {
+    public Cupom(int idCupom, double valor) {
+        this.idCupom = idCupom;
         this.valor = valor;
-        this.deletado = validade;
+        this.setDeletado("F");
     }
 
     public void imprimirCupom(){
@@ -24,9 +25,10 @@ public class Cupom {
 
     @Override
     public String toString() {
-        return "com.dbc.model.Cupom{" +
-                "valor=" + valor +
-                ", validade=" + deletado +
+        return "Cupom{" +
+                "idCupom=" + idCupom +
+                ", valor=" + valor +
+                ", deletado='" + deletado + '\'' +
                 '}';
     }
 

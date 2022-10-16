@@ -6,6 +6,7 @@ import java.util.List;
 public class Pedido {
 
     private List<Produto> produtos;
+
     private Cupom cupom;
 
     private int idPedido;
@@ -26,7 +27,7 @@ public class Pedido {
         this.idCupom = idCupom;
         this.idUsuario = idUsuario;
         this.valorFinal = valorFinal;
-        this.deletado = deletado;
+        this.setDeletado("F");
     }
 
     @Override

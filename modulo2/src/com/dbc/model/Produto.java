@@ -28,7 +28,7 @@ public class Produto {
         this.tipo = tipo;
         this.valor = valor;
         this.idUsuario = idUsuario;
-        this.deletado = deletado;
+        this.setDeletado("F");
     }
 
     @Override

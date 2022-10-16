@@ -11,7 +11,7 @@ import java.util.List;
 public class CupomRepository implements Repositorio<Integer, Cupom> {
     @Override
     public Integer getProximoId(Connection connection) throws SQLException {
-        String sql = "SELECT POKE_STORE.SEQ_CUPOM.nextval mysequence from DUAL";
+        String sql = "SELECT SEQ_CUPOM.nextval mysequence from DUAL";
 
         Statement stmt = connection.createStatement();
         ResultSet res = stmt.executeQuery(sql);
@@ -128,21 +128,23 @@ public class CupomRepository implements Repositorio<Integer, Cupom> {
     @Override
     public List<Cupom> listar() throws BancoDeDadosException {
         List<Cupom> cupons = new ArrayList<>();
+
         Connection con = null;
         try {
             con = ConexaoBancoDeDados.getConnection();
             Statement stmt = con.createStatement();
 
-            String sql = "SELECT * FROM CUPOM";
+            String sql = "SELECT * FROM CUPOM" +
+                    " WHERE DELETADO = 'F'";
 
             // Executa-se a consulta
             ResultSet res = stmt.executeQuery(sql);
 
             while (res.next()) {
                 Cupom cupom = new Cupom();
-                cupom.setIdCupom(res.getInt("ID_CUPOM"));
-                cupom.setValor(res.getDouble("VALOR"));
-                cupom.setDeletado(res.getString("DELETADO"));
+                cupom.setIdCupom(res.getInt("id_cupom"));
+                cupom.setValor(res.getDouble("desconto"));
+                cupom.setDeletado(res.getString("deletado"));
                 cupons.add(cupom);
             }
         } catch (SQLException e) {
