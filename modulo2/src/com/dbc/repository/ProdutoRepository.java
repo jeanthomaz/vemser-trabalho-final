@@ -2,7 +2,6 @@ package com.dbc.repository;
 
 import com.dbc.enums.Tipos;
 import com.dbc.exceptions.*;
-import com.dbc.model.Usuario;
 import com.dbc.model.Produto;
 
 import java.sql.*;

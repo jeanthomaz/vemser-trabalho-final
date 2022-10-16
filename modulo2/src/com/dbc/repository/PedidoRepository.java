@@ -2,8 +2,6 @@ package com.dbc.repository;
 
 import com.dbc.exceptions.*;
 import com.dbc.model.Pedido;
-import com.dbc.model.Cupom;
-import com.dbc.model.Produto;
 
 import java.sql.*;
 import java.sql.SQLException;
@@ -18,7 +16,7 @@ public class PedidoRepository implements Repositorio<Integer, Pedido> {
         Statement stmt = connection.createStatement();
         ResultSet res = stmt.executeQuery(sql);
 
-        if (res.next()){
+        if (res.next()) {
             return res.getInt("mysequence");
         }
 
@@ -62,8 +60,7 @@ public class PedidoRepository implements Repositorio<Integer, Pedido> {
     }
 
 
-
-        @Override
+    @Override
     public boolean remover(Integer id) throws BancoDeDadosException {
         Connection con = null;
         try {
@@ -94,15 +91,6 @@ public class PedidoRepository implements Repositorio<Integer, Pedido> {
         }
     }
 
-    public void insereTabelaRelacionamento(Produto produto, Pedido pedido){
-        // Adicionar o Id Produto com o Id Pedido
-        // Insert na tabela intermediaria os IDs
-        // fazer um while/for para ir inteirando nessa lista de produto, de um por um inserindo na tabela intermediaria
-
-        
-
-
-    }
 
     @Override
     public boolean editar(Integer id, Pedido pedido) throws BancoDeDadosException {
@@ -122,7 +110,7 @@ public class PedidoRepository implements Repositorio<Integer, Pedido> {
             stmt.setInt(1, pedido.getIdCupom());
             stmt.setInt(2, pedido.getIdUsuario());
             stmt.setDouble(3, pedido.getValorFinal());
-            stmt.setString(4,pedido.getDeletado());
+            stmt.setString(4, pedido.getDeletado());
 
             // Executa-se a consulta
             int res = stmt.executeUpdate();
@@ -157,11 +145,11 @@ public class PedidoRepository implements Repositorio<Integer, Pedido> {
 
             while (res.next()) {
                 Pedido pedido = new Pedido();
-                    pedido.setIdPedido(res.getInt("ID_PEDIDO"));
-                    pedido.setIdCupom(res.getInt("ID_CUPOM"));
-                    pedido.setIdUsuario(res.getInt("ID_USUARIO"));
-                    pedido.setValorFinal(res.getDouble("VALOR_FINAL"));
-                    pedidos.add(pedido);
+                pedido.setIdPedido(res.getInt("ID_PEDIDO"));
+                pedido.setIdCupom(res.getInt("ID_CUPOM"));
+                pedido.setIdUsuario(res.getInt("ID_USUARIO"));
+                pedido.setValorFinal(res.getDouble("VALOR_FINAL"));
+                pedidos.add(pedido);
             }
         } catch (SQLException e) {
             throw new BancoDeDadosException(e.getCause());

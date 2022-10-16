@@ -5,9 +5,9 @@ import java.util.List;
 
 public class Pedido {
 
-    private List<Produto> produtos;
+    private List<ProdutoPedido> produtosPedido = new ArrayList<>(); // ID
 
-    private Cupom cupom;
+    private Cupom cupom; // ID
 
     private int idPedido;
     private int idCupom;
@@ -20,8 +20,8 @@ public class Pedido {
 
     }
 
-    public Pedido(List<Produto> produtos, Cupom cupom, int idPedido, int idCupom, int idUsuario, double valorFinal, String deletado) {
-        this.produtos = produtos;
+    public Pedido(List<ProdutoPedido> produtosPedido, Cupom cupom, int idPedido, int idCupom, int idUsuario, double valorFinal, String deletado) {
+        this.produtosPedido = produtosPedido;
         this.cupom = cupom;
         this.idPedido = idPedido;
         this.idCupom = idCupom;
@@ -33,7 +33,7 @@ public class Pedido {
     @Override
     public String toString() {
         return "Pedido{" +
-                "produtos=" + produtos +
+                "produtos=" + produtosPedido +
                 ", cupom=" + cupom +
                 ", idPedido=" + idPedido +
                 ", idCupom=" + idCupom +
@@ -43,12 +43,12 @@ public class Pedido {
                 '}';
     }
 
-    public List<Produto> getProdutos() {
-        return produtos;
+    public List<ProdutoPedido> getProdutosPedido() {
+        return produtosPedido;
     }
 
-    public void setProdutos(List<Produto> produtos) {
-        this.produtos = produtos;
+    public void setProdutosPedido(List<ProdutoPedido> produtosPedido) {
+        this.produtosPedido = produtosPedido;
     }
 
     public Cupom getCupom() {
@@ -83,27 +83,20 @@ public class Pedido {
         this.idUsuario = idUsuario;
     }
 
-    public double getValorFinal() {
-        return valorFinal;
-    }
-
     public void setValorFinal(double valorFinal) {
         this.valorFinal = valorFinal;
     }
 
-    public double getValorFinal(Produto produto, Cupom cupom) {
-        if (produtos.size() > 0) {
-            double aux = 0;
-            for (Produto value : produtos) {
-                aux += value.getValor() * value.getQuantidade();
-                if (cupom.getDeletado() == "F") {
-                    double valorFinal = aux - cupom.getValor();
-                } else if (cupom.getDeletado() == "T") {
-                    double valorFinal = aux;
-                } else {
-                    double valorFinal = 0;
-                }
+    public double getValorFinal() { // mudar para service
+        if (produtosPedido.size() > 0) {
+            double valorFinal = 0;
+            for (ProdutoPedido value : produtosPedido) {
+                valorFinal += value.getValor();
             }
+            if (cupom.getDeletado().equals("F")) {
+                valorFinal = valorFinal - cupom.getValor();
+            }
+            return valorFinal;
         }
         return 0;
     }

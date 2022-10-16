@@ -2,21 +2,30 @@ package com.dbc.service;
 
 import com.dbc.exceptions.*;
 import com.dbc.model.Pedido;
+import com.dbc.model.ProdutoPedido;
 import com.dbc.repository.PedidoRepository;
+import com.dbc.repository.ProdutoPedidoRepository;
 
 import java.util.List;
 
 public class PedidoService {
     private PedidoRepository pedidoRepository;
 
+    private ProdutoPedidoRepository produtoPedidoRepository;
+
     public PedidoService() {
         pedidoRepository = new PedidoRepository();
+        produtoPedidoRepository = new ProdutoPedidoRepository();
     }
 
     // criação de um objeto
-    public void adicionarPedido(Pedido pedido) {
+    public void adicionarPedido(Pedido pedido) { // vai adicionar tudo dentro da tabela N para N (Pedido_Produto)
         try {
             Pedido pedidoAdicionado = pedidoRepository.adicionar(pedido);
+            for (ProdutoPedido produtoPedido : pedidoAdicionado.getProdutosPedido()) {
+                produtoPedido.setPedido(pedidoAdicionado);
+                produtoPedidoRepository.adicionar(produtoPedido);
+            }
             System.out.println("Pedido adicionado com sucesso! " + pedidoAdicionado);
         } catch (BancoDeDadosException e) {
             e.printStackTrace();

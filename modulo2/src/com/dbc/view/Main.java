@@ -2,18 +2,19 @@ package com.dbc.view;
 
 import com.dbc.enums.Tipos;
 import com.dbc.model.*;
-import com.dbc.exceptions.*;
 
 import com.dbc.repository.*;
 import com.dbc.service.*;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.InputMismatchException;
-import java.util.Objects;
 import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
 
@@ -25,7 +26,7 @@ public class Main {
         //EDITAR DAQUI PRA BAIXO ///
 
 //       usuarioService.listar();
-       pedidoService.listarPedido();
+        pedidoService.listarPedido();
 
         int opcao = -1;
         int escolha = 9;
@@ -139,7 +140,7 @@ public class Main {
                     Usuario usuario = new Usuario();
                     usuario = fazerLogin(usuarioService, scanner);
 
-                    while(usuario == null) {
+                    while (usuario == null) {
                         usuario = fazerLogin(usuarioService, scanner);
                     }
 
@@ -163,11 +164,17 @@ public class Main {
                             Pedido pedido = new Pedido();
                             produtoService.listarProdutos();
                             System.out.println("Escolha seu produto pelo ID");
-                            pedido.getIdPedido();
+                            //adicionando os produtos dentro do pedido (Lista)
+                            // recuperar produtos e qtds, fazer o valor da qtd p/ tabela produto_pedido;
+                            //adicionar pedido, atualizando cada vez q fizer um novo pedido, atualiza o valor
+                            // td de uma vez, unico insert e deu;
+                            scanner.nextInt();
+                            pedido.getIdPedido(); //adicionando os pedidos na lista
                             pedidoService.adicionarPedido(pedido);
+                            //
 
                         }
-                        case 3 : {
+                        case 3: {
 
                             // cadastro de produto
                             Produto produto = new Produto();
@@ -189,7 +196,7 @@ public class Main {
                             produto.setValor(scanner.nextDouble());
                             break;
                         }
-                        case 4 : {
+                        case 4: {
                             // edição de produto
                             System.out.println("Qual Produto você deseja editar ?");
                             produtoService.listarProdutos();
@@ -214,17 +221,17 @@ public class Main {
                             editarproduto.setValor(scanner.nextDouble());
                             break;
                         }
-                        case 5 : {
+                        case 5: {
                             // exclusão de produto
                             System.out.println("Qual produto você deseja excluir?");
                             produtoService.listarProdutos();
                             boolean validouNumero = false;
-                            while (!validouNumero){
-                                try{
+                            while (!validouNumero) {
+                                try {
                                     int id = scanner.nextInt();
                                     produtoService.removerProduto(id);
                                     validouNumero = true;
-                                } catch (InputMismatchException ex){
+                                } catch (InputMismatchException ex) {
                                     System.err.println("numero invalido");
                                 }
                             }
@@ -241,13 +248,12 @@ public class Main {
         }
     }
 
-
-    public static Usuario fazerLogin(UsuarioService usuarioService, Scanner entrada){
+    public static Usuario fazerLogin(UsuarioService usuarioService, Scanner entrada) {
 
         Usuario usuario = new Usuario();
         Usuario resultadoUser = null;
 
-        try{
+        try {
             while (true) {
                 System.out.println("Digite o email ");
                 usuario.setEmail(entrada.nextLine());
@@ -255,12 +261,12 @@ public class Main {
                 usuario.setSenha(entrada.nextLine());
                 Usuario usuarioEncontrado = usuarioService.verificarUsuario(usuario);
                 if (usuarioEncontrado.getEmail().equals(usuario.getEmail()) && usuarioEncontrado.getSenha().equals(usuario.getSenha())) {
-                    System.out.println("\n"+usuario.getEmail() + " Logado com sucesso!");
+                    System.out.println("\n" + usuario.getEmail() + " Logado com sucesso!");
                     resultadoUser = usuarioEncontrado;
                     break;
                 }
             }
-        }catch (Exception ex){
+        } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
         return resultadoUser;
