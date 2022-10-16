@@ -75,7 +75,9 @@ public class ProdutoRepository implements Repositorio<Integer, Produto> {
         try {
             con = ConexaoBancoDeDados.getConnection();
 
-            String sql = "DELETE FROM PRODUTO WHERE ID_PRODUTO = ?";
+            String sql = "UPDATE PRODUTO \n" +
+                    "SET DELETADO = 'T'\n" +
+                    "WHERE ID_PRODUTO = ?";
 
             PreparedStatement stmt = con.prepareStatement(sql);
 
@@ -154,7 +156,8 @@ public class ProdutoRepository implements Repositorio<Integer, Produto> {
             con = ConexaoBancoDeDados.getConnection();
             Statement stmt = con.createStatement();
 
-            String sql = "SELECT * FROM PRODUTO";
+            String sql = "SELECT * FROM PRODUTO" +
+                    "WHERE DELETADO = 'F' ";
 
             // Executa-se a consulta
             ResultSet res = stmt.executeQuery(sql);

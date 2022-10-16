@@ -63,7 +63,9 @@ public class CupomRepository implements Repositorio<Integer, Cupom> {
         try {
             con = ConexaoBancoDeDados.getConnection();
 
-            String sql = "DELETE FROM CUPOM WHERE id_cupom = ?";
+            String sql = "UPDATE CUPOM \n" +
+                    "SET DELETADO = 'T'\n" +
+                    "WHERE ID_CUPOM = ?";
 
             PreparedStatement stmt = con.prepareStatement(sql);
 

@@ -66,7 +66,9 @@ public class PedidoRepository implements Repositorio<Integer, Pedido> {
         try {
             con = ConexaoBancoDeDados.getConnection();
 
-            String sql = "DELETE FROM PEDIDO WHERE id_pedido = ?";
+            String sql = "UPDATE PEDIDO \n" +
+                    "SET DELETADO = 'T'\n" +
+                    "WHERE ID_PEDIDO = ?";
 
             PreparedStatement stmt = con.prepareStatement(sql);
 

@@ -33,12 +33,13 @@ public class Main {
         int escolha = 9;
         int choise = -1;
 
+        // remover é dar um setDeletado para "T"//
         while (opcao != 0) {
             System.out.println("Digite 1 para realizar seu cadastro");
             System.out.println("Digite 2 para editar um usuário");
-            System.out.println("Digite 3 para excluir um usuário");
+            System.out.println("Digite 3 para excluir um usuário"); // aqui ta que tu pode excluir o usuario sem fazer login, teria que ser o admin mas a gente n tem//
             System.out.println("Digite 4 para listar os usuarios");
-            System.out.println("Digite 5 para logar em sua conta");
+            System.out.println("Digite 5 para logar em sua conta"); //aqui da para fazer o excluir o PROPRIO USUARIO (TRANSFORMANDO O DELETADO EM T"
             System.out.println("Digite 0 para encerrar o programa");
 
 

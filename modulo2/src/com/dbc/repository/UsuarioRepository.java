@@ -75,7 +75,9 @@ public class UsuarioRepository implements Repositorio<Integer, Usuario> {
         try {
             con = ConexaoBancoDeDados.getConnection();
 
-            String sql = "DELETE FROM USUARIO WHERE ID_USUARIO = ?";
+            String sql = "UPDATE USUARIO \n" +
+                    "SET DELETADO = 'T'\n" +
+                    "WHERE ID_USUARIO = ?";
 
             PreparedStatement stmt = con.prepareStatement(sql);
 
