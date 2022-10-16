@@ -3,6 +3,7 @@ package com.dbc.repository;
 import com.dbc.exceptions.*;
 import com.dbc.model.Pedido;
 import com.dbc.model.Cupom;
+import com.dbc.model.Produto;
 
 import java.sql.*;
 import java.sql.SQLException;
@@ -60,7 +61,9 @@ public class PedidoRepository implements Repositorio<Integer, Pedido> {
         }
     }
 
-    @Override
+
+
+        @Override
     public boolean remover(Integer id) throws BancoDeDadosException {
         Connection con = null;
         try {
@@ -89,6 +92,16 @@ public class PedidoRepository implements Repositorio<Integer, Pedido> {
                 e.printStackTrace();
             }
         }
+    }
+
+    public void insereTabelaRelacionamento(Produto produto, Pedido pedido){
+        // Adicionar o Id Produto com o Id Pedido
+        // Insert na tabela intermediaria os IDs
+        // fazer um while/for para ir inteirando nessa lista de produto, de um por um inserindo na tabela intermediaria
+
+        
+
+
     }
 
     @Override
@@ -128,7 +141,6 @@ public class PedidoRepository implements Repositorio<Integer, Pedido> {
         }
     }
 
-
     @Override
     public List<Pedido> listar() throws BancoDeDadosException {
         List<Pedido> pedidos = new ArrayList<>();
@@ -164,4 +176,6 @@ public class PedidoRepository implements Repositorio<Integer, Pedido> {
         }
         return pedidos;
     }
+
+    //fazer um insert
 }

@@ -3,23 +3,23 @@ package com.dbc.enums;
 import java.util.Arrays;
 
 public enum Tipos {
-    JOGOS(1),
-    CONSOLE(2),
-    COLECIONAVEL(3);
+    JOGOS("1"),
+    CONSOLE("2"),
+    COLECIONAVEL("3");
 
-    private Integer tipo;
+    private String tipo;
 
-    Tipos(Integer tipo){
+    Tipos(String tipo){
 
         this.tipo = tipo;
     }
 
-    public Integer getTipos() {
+    public String getTipos() {
 
         return tipo;
     }
 
-    public static Tipos ofTipo(Integer tipo) {
+    public static Tipos ofTipo(String tipo) {
         return Arrays.stream(Tipos.values())
                 .filter(tp -> tp.getTipos().equals(tipo))
                 .findFirst()

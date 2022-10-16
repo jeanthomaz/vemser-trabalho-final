@@ -25,7 +25,7 @@ public class Main {
         //EDITAR DAQUI PRA BAIXO ///
 
 //       usuarioService.listar();
-//       pedidoService.listarPedido();
+       pedidoService.listarPedido();
 
         int opcao = -1;
         int escolha = 9;
@@ -182,7 +182,7 @@ public class Main {
                             produto.setQuantidade(scanner.nextInt());
 
                             System.out.println("Digite o tipo de produto (1-JOGOS 2-CONSOLE 3-COLECIONÁVEIS): ");
-                            produto.setTipo(Tipos.ofTipo(scanner.nextInt()));
+                            produto.setTipo(Tipos.ofTipo(scanner.nextLine()));
                             scanner.nextLine();
 
                             System.out.println("Digite o valor do produto por unidade: ");
@@ -207,7 +207,7 @@ public class Main {
                             editarproduto.setQuantidade(scanner.nextInt());
 
                             System.out.println("Digite o tipo de produto (1-JOGOS 2-CONSOLE 3-COLECIONÁVEIS): ");
-                            editarproduto.setTipo(Tipos.ofTipo(scanner.nextInt()));
+                            editarproduto.setTipo(Tipos.ofTipo(scanner.nextLine()));
                             scanner.nextLine();
 
                             System.out.println("Digite o valor do produto por unidade: ");

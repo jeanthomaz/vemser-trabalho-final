@@ -48,7 +48,7 @@ public class ProdutoRepository implements Repositorio<Integer, Produto> {
             stmt.setString(2,produto.getNome());
             stmt.setString(3,produto.getDescricao());
             stmt.setInt(4,produto.getQuantidade());
-            stmt.setInt(5,produto.getTipo().getTipos());
+            stmt.setString(5,produto.getTipo().getTipos());
             stmt.setDouble(6,produto.getValor());
             stmt.setInt(7,produto.getIdUsuario());
             stmt.setString(8,produto.getDeletado());
@@ -68,6 +68,8 @@ public class ProdutoRepository implements Repositorio<Integer, Produto> {
             }
         }
     }
+
+
 
     @Override
     public boolean remover(Integer id) throws BancoDeDadosException {
@@ -124,7 +126,7 @@ public class ProdutoRepository implements Repositorio<Integer, Produto> {
             stmt.setString(2,produto.getNome());
             stmt.setString(3,produto.getDescricao());
             stmt.setInt(4,produto.getQuantidade());
-            stmt.setInt(5,produto.getTipo().getTipos());
+            stmt.setString(5,produto.getTipo().getTipos());
             stmt.setDouble(6,produto.getValor());
             stmt.setInt(7,produto.getIdUsuario());
             stmt.setString(8,produto.getDeletado());
@@ -168,7 +170,7 @@ public class ProdutoRepository implements Repositorio<Integer, Produto> {
                 produto.setNome(res.getString("NOME"));
                 produto.setDescricao(res.getString("DESCRICAO"));
                 produto.setQuantidade(res.getInt("QUANTIDADE"));
-//                produto.setTipo(Tipos.ofTipo(res.getString("TIPO")));
+                produto.setTipo(Tipos.ofTipo(res.getString("TIPO")));
                 produto.setValor(res.getDouble("VALOR"));
                 produto.setIdUsuario(res.getInt("ID_USUARIO"));
                 produto.setDeletado(res.getString("DELETADO" ));
