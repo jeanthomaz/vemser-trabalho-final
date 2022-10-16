@@ -12,12 +12,17 @@ public class ProdutoPedido {
 
     private Double valor;
 
+    private String deletado;
+
+    public ProdutoPedido(){
+
+    }
     public ProdutoPedido(Integer idProdutoPedido, Produto produto, Pedido pedido, Integer quantidade, Double valor) {
         this.idProdutoPedido = idProdutoPedido;
         this.produto = produto;
         this.pedido = pedido;
         this.quantidade = quantidade;
-        this.valor = valor;
+        this.setDeletado("F");
     }
 
     @Override
@@ -29,6 +34,14 @@ public class ProdutoPedido {
                 ", quantidade=" + quantidade +
                 ", valor=" + valor +
                 '}';
+    }
+
+    public String getDeletado() {
+        return deletado;
+    }
+
+    public void setDeletado(String deletado) {
+        this.deletado = deletado;
     }
 
     public Integer getIdProdutoPedido() {

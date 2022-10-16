@@ -9,7 +9,9 @@ import com.dbc.service.*;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -161,9 +163,14 @@ public class Main {
                         }
                         case 2: {
                             //Realiza a compra dos pedidos
-                            Pedido pedido = new Pedido();
-                            produtoService.listarProdutos();
+                            ProdutoPedido produtoPedido = new ProdutoPedido();
+                            List<Produto> produtos = new ArrayList<>();
                             System.out.println("Escolha seu produto pelo ID");
+                            boolean escolha = true;
+                            while(true){
+                                ProdutoPedidoRepository produtoPedidoRepository = new ProdutoPedidoRepository();
+                                produtoPedidoRepository.getProximoId();
+                            }
                             //adicionando os produtos dentro do pedido (Lista)
                             // recuperar produtos e qtds, fazer o valor da qtd p/ tabela produto_pedido;
                             //adicionar pedido, atualizando cada vez q fizer um novo pedido, atualiza o valor
