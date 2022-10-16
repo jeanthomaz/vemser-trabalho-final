@@ -22,8 +22,6 @@ public class PedidoService {
             e.printStackTrace();
         } catch (Exception e) {
             System.out.println("ERRO: " + e.getMessage());
-//            System.out.println("TRACE: ");
-//            e.printStackTrace();
         }
     }
 

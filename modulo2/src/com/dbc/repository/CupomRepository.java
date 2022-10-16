@@ -19,7 +19,6 @@ public class CupomRepository implements Repositorio<Integer, Cupom> {
         if (res.next()){
             return res.getInt("mysequence");
         }
-
         return null;
     }
 

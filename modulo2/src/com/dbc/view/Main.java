@@ -1,10 +1,14 @@
 package com.dbc.view;
 
+import com.dbc.enums.Tipos;
 import com.dbc.model.Pedido;
 import com.dbc.model.Produto;
 import com.dbc.model.Usuario;
 import com.dbc.model.Cupom;
+import com.dbc.exceptions.*;
 
+import com.dbc.repository.PedidoRepository;
+import com.dbc.repository.UsuarioRepository;
 import com.dbc.service.*;
 
 import java.util.InputMismatchException;
@@ -23,158 +27,208 @@ public class Main {
 
         //EDITAR DAQUI PRA BAIXO ///
 
+
+
         int opcao = -1;
+        int escolha = 9;
+        int choise = -1;
+
         while (opcao != 0) {
-            System.out.println("Digite 1 para criar pessoa");
-            System.out.println("Digite 2 para listar pessoas");
-            System.out.println("Digite 3 para editar uma pessoa");
-            System.out.println("Digite 4 para excluir pessoas");
-            System.out.println("Digite 5 para criar contato");
-            System.out.println("Digite 6 para listar contatos");
-            System.out.println("Digite 7 para editar contatos");
-            System.out.println("Digite 8 para excluir contatos");
-            System.out.println("Digite 9 para listar contatos por código da pessoa");
-            System.out.println("Digite 0 para sair");
+            System.out.println("Digite 1 para realizar seu cadastro");
+            System.out.println("Digite 2 para editar um usuário");
+            System.out.println("Digite 3 para excluir um usuário");
+            System.out.println("Digite 4 para listar os usuarios");
+            System.out.println("Digite 5 para logar em sua conta");
+            System.out.println("Digite 0 para encerrar o programa");
+
+
             opcao = scanner.nextInt();
             scanner.nextLine();
             switch (opcao) {
-                case 1: {// adição
-                    Pessoa pessoa = new Pessoa();
-                    System.out.println("Digite o nome da pessoa");
-                    pessoa.setNome(scanner.nextLine());
+                case 1: {// Cadastro de usuário
+                    Usuario user = new Usuario();
+                    System.out.println("Digite o seu nome: ");
+                    user.setNome(scanner.nextLine());
 
-                    System.out.println("Digite a data de nascimento (dd/MM/yyyy)");
-                    String text = scanner.nextLine();
-                    pessoa.setDataNascimento(LocalDate.parse(text, formatter));
+                    System.out.println("Digite o seu endereço: ");
+                    user.setEndereco(scanner.nextLine());
 
-                    System.out.println("Digite o cpf");
-                    pessoa.setCpf(scanner.nextLine());
+                    System.out.println("Digite o seu CPF: ");
+                    user.setCpf(scanner.nextInt());
 
-                    pessoaService.adicionarPessoa(pessoa);
+                    System.out.println("Digite sua cidade: ");
+                    user.setCidade(scanner.nextLine());
+
+                    System.out.println("Digite seu estado: ");
+                    user.setEstado(scanner.nextLine());
+
+                    System.out.println("Digite seu telefone: ");
+                    user.setTelefone(scanner.nextInt());
+
+                    System.out.println("Digite seu email: ");
+                    user.setEmail(scanner.nextLine());
+
+                    System.out.println("Digite sua senha: ");
+                    user.setSenha(scanner.nextLine());
+
+                    System.out.println("Digite o seu pix: ");
+                    user.setPix(scanner.nextLine());
+
+                    usuarioService.adicionarUsuario(user);
                     break;
                 }
                 case 2: {
-                    // listagem
-                    pessoaService.listarPessoas();
+                    // edição
+                    System.out.println("Selecione um dos usuários a baixo para editar");
+                    usuarioService.listar();
+                    int index = scanner.nextInt();
+                    scanner.nextLine();
+
+                    Usuario newUser = new Usuario();
+                    System.out.println("Digite o seu nome: ");
+                    newUser.setNome(scanner.nextLine());
+
+                    System.out.println("Digite o seu endereço: ");
+                    newUser.setEndereco(scanner.nextLine());
+
+                    System.out.println("Digite o seu CPF: ");
+                    newUser.setCpf(scanner.nextInt());
+
+                    System.out.println("Digite sua cidade: ");
+                    newUser.setCidade(scanner.nextLine());
+
+                    System.out.println("Digite seu estado: ");
+                    newUser.setEstado(scanner.nextLine());
+
+                    System.out.println("Digite seu telefone: ");
+                    newUser.setTelefone(scanner.nextInt());
+
+                    System.out.println("Digite seu email: ");
+                    newUser.setEmail(scanner.nextLine());
+
+                    System.out.println("Digite sua senha: ");
+                    newUser.setSenha(scanner.nextLine());
+
+                    System.out.println("Digite o seu pix: ");
+                    newUser.setPix(scanner.nextLine());
+
+                    usuarioService.editar(index, newUser);
                     break;
                 }
                 case 3: {
-                    // edição
-                    System.out.println("Qual pessoa você deseja editar?");
-                    pessoaService.listarPessoas();
-                    int index = scanner.nextInt();
-                    scanner.nextLine();
-
-                    Pessoa pessoaNova = new Pessoa();
-                    System.out.println("Digite o nome da pessoa");
-
-                    pessoaNova.setNome(scanner.nextLine());
-                    System.out.println("Digite a data de nascimento (dd/MM/yyyy)");
-
-                    String text = scanner.nextLine();
-
-                    pessoaNova.setDataNascimento(LocalDate.parse(text, formatter));
-                    System.out.println("Digite o cpf");
-
-                    pessoaNova.setCpf(scanner.nextLine());
-                    pessoaService.editarPessoa(index, pessoaNova);
+                    // exclusão
+                    System.out.println("Qual pessoa você deseja excluir?");
+                    usuarioService.listar();
+                    int id = scanner.nextInt();
+                    usuarioService.remover(id);
                     break;
                 }
                 case 4: {
-                    // exclusão
-                    System.out.println("Qual pessoa você deseja excluir?");
-                    pessoaService.listarPessoas();
-                    int id = scanner.nextInt();
-                    pessoaService.removerPessoa(id);
+                    // listagem
+                    usuarioService.listar();
                     break;
                 }
+
 
                 case 5: {
-                    // adição contato
-                    Contato contato = new Contato();
-                    System.out.println("Digite o codigo da pessoa para adicionar contato: ");
-                    pessoaService.listarPessoas();
-                    int index = scanner.nextInt();
-                    scanner.nextLine();
+                    Usuario usuario = new Usuario();
+                    usuario = fazerLogin(scanner, usuarioService);
 
-                    Pessoa pessoaContato = new Pessoa();
-                    pessoaContato.setIdPessoa(index);
-                    contato.setPessoa(pessoaContato);
+                    while(usuario == null) {
+                        usuario = fazerLogin(scanner, usuarioService);
+                    }
 
-                    System.out.println("Digite o tipo (1-RESIDENCIAL 2-COMERCIAL): ");
-                    contato.setTipoContato(TipoContato.ofTipo(scanner.nextInt()));
-                    scanner.nextLine();
+                    System.out.println("---- Login efetuado com sucesso -----");
+                    System.out.println("Digite 1 para listar os produtos disponiveis na loja");
+                    System.out.println("Digite 2 para realizar um pedido");
+                    System.out.println("Digite 3 para cadastrar um produto");
+                    System.out.println("Digite 4 para alterar informações de um produto já cadastrado por você");
+                    System.out.println("Digite 5 para excluir um produto cadastrado por você da lista");
 
-                    System.out.println("Digite o numero: ");
-                    contato.setNumero(scanner.nextLine());
+                    escolha = scanner.nextInt();
+                    scanner.nextInt();
 
-                    System.out.println("Digite a descricao: ");
-                    contato.setDescricao(scanner.nextLine());
+                    switch (escolha) {
+                        case 1: {
+                            // listagem produtos
+                            produtoService.listarProdutos();
+                            break;
+                        }
+                        case 2: {
+                            //Realiza a compra dos pedidos
+                            Pedido pedido = new Pedido();
+                            produtoService.listarProdutos();
+                            System.out.println("Escolha seu produto pelo ID");
+                            pedido.getp();
+                            pedidoService.adicionarPedido(pedido);
 
-                    contatoService.adicionarContato(contato);
-                    break;
-                }
-                case 6: {
-                    // listagem
-                    contatoService.listar();
-                    break;
-                }
-                case 7: {
-                    // edição
-                    System.out.println("Qual contato você deseja editar?");
-                    contatoService.listar();
-                    int id = scanner.nextInt();
-                    scanner.nextLine();
 
-                    Contato contato = new Contato();
-                    System.out.println("Digite o codigo da pessoa para adicionar contato: ");
-                    pessoaService.listarPessoas();
-                    int index = scanner.nextInt();
-                    scanner.nextLine();
 
-                    Pessoa pessoaContato = new Pessoa();
-                    pessoaContato.setIdPessoa(index);
-                    contato.setPessoa(pessoaContato);
+                        }
+                        case 3 : {
 
-                    System.out.println("Digite o tipo (1-RESIDENCIAL 2-COMERCIAL): ");
-                    int tipo = scanner.nextInt();
-                    TipoContato tipoContato = TipoContato.ofTipo(tipo);
-                    contato.setTipoContato(tipoContato);
-                    scanner.nextLine();
+                            // cadastro de produto
+                            Produto produto = new Produto();
 
-                    System.out.println("Digite o numero: ");
-                    contato.setNumero(scanner.nextLine());
+                            System.out.println("Digite o nome do produto: ");
+                            produto.setNome(scanner.nextLine());
 
-                    System.out.println("Digite a descricao: ");
-                    contato.setDescricao(scanner.nextLine());
+                            System.out.println("Digite a descrição do produto: ");
+                            produto.setDescricao(scanner.nextLine());
 
-                    contatoService.editar(id, contato);
-                    break;
-                }
-                case 8: {
-                    // exclusão
-                    System.out.println("Qual contato você deseja excluir?");
-                    contatoService.listar();
-                    boolean validouNumero = false;
-                    while (!validouNumero){
-                        try{
-                            int id = scanner.nextInt();
-                            contatoService.remover(id);
-                            validouNumero = true;
-                        } catch (InputMismatchException ex){
-                            System.err.println("numero invalido");
+                            System.out.println("Digite a quantidade de produtos: ");
+                            produto.setQuantidade(scanner.nextInt());
+
+                            System.out.println("Digite o tipo de produto (1-JOGOS 2-CONSOLE 3-COLECIONÁVEIS): ");
+                            produto.setTipo(Tipos.ofTipo(scanner.nextInt()));
+                            scanner.nextLine();
+
+                            System.out.println("Digite o valor do produto por unidade: ");
+                            produto.setValor(scanner.nextDouble());
+                            break;
+                        }
+                        case 4 : {
+                            // edição de produto
+                            System.out.println("Qual Produto você deseja editar ?");
+                            produtoService.listarProdutos();
+
+                            Produto editarproduto = new Produto();
+                            scanner.nextLine();
+
+                            System.out.println("Digite o nome do produto: ");
+                            editarproduto.setNome(scanner.nextLine());
+
+                            System.out.println("Digite a descrição do produto: ");
+                            editarproduto.setDescricao(scanner.nextLine());
+
+                            System.out.println("Digite a quantidade de produtos: ");
+                            editarproduto.setQuantidade(scanner.nextInt());
+
+                            System.out.println("Digite o tipo de produto (1-JOGOS 2-CONSOLE 3-COLECIONÁVEIS): ");
+                            editarproduto.setTipo(Tipos.ofTipo(scanner.nextInt()));
+                            scanner.nextLine();
+
+                            System.out.println("Digite o valor do produto por unidade: ");
+                            editarproduto.setValor(scanner.nextDouble());
+                            break;
+                        }
+                        case 5 : {
+                            // exclusão de produto
+                            System.out.println("Qual produto você deseja excluir?");
+                            produtoService.listarProdutos();
+                            boolean validouNumero = false;
+                            while (!validouNumero){
+                                try{
+                                    int id = scanner.nextInt();
+                                    produtoService.removerProduto(id);
+                                    validouNumero = true;
+                                } catch (InputMismatchException ex){
+                                    System.err.println("numero invalido");
+                                }
+                            }
+                            break;
                         }
                     }
-                    break;
-                }
-                case 9: {
-                    System.out.println("Qual pessoa você deseja ver os contatos?");
-                    pessoaService.listarPessoas();
-                    int id = scanner.nextInt();
-                    scanner.nextLine();
-
-                    contatoService.listarContatoPorCodigoDaPessoa(id);
-                    break;
                 }
                 case 0:
                     break;
@@ -186,10 +240,18 @@ public class Main {
     }
 }
 
-
-
-
-
-
+    public static Usuario fazerLogin(Scanner entrada, UsuarioService usuarioService) throws BancoDeDadosException {
+        try {
+            System.out.println("Digite o email");
+            String email = entrada.nextLine();
+            System.out.println("Digite uma senha");
+            String senha = entrada.nextLine();
+            return usuarioService.fazerLogin(email, senha);
+        } catch (EmailRepetidoException e) {
+            e.printStackTrace();
+            System.err.println(e.getMessage());
+            return null;
+        }
     }
 }
+

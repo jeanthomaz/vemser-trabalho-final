@@ -3,8 +3,10 @@ package com.dbc.service;
 import com.dbc.exceptions.BancoDeDadosException;
 import com.dbc.model.Usuario;
 import com.dbc.repository.UsuarioRepository;
+import com.dbc.exceptions.EmailRepetidoException;
 
 import java.util.List;
+import java.util.Optional;
 
 public class UsuarioService {
     private UsuarioRepository usuarioRepository;
@@ -16,10 +18,9 @@ public class UsuarioService {
     // criação de um objeto
     public void adicionarUsuario(Usuario usuario) {
         try {
-            if (usuario.getCidade().length() != 11){
+            if (usuario.getCidade().length() != 11) {
                 throw new Exception("CPF Inválido!");
-            }
-            else if (usuario.getEmail() != null && usuarioRepository.findByEmail(usuario)) {
+            } else if (usuario.getEmail() != null && usuarioRepository.findByEmail(usuario)) {
                 throw new Exception("Email já cadastrado!");
             } else if (usuario.getCpf() != null && usuarioRepository.findByCPF(usuario)) {
                 throw new Exception("CPF já cadastrado!");
@@ -61,6 +62,22 @@ public class UsuarioService {
             usuarioRepository.listar().forEach(System.out::println);
         } catch (BancoDeDadosException e) {
             e.printStackTrace();
+        }
+    }
+
+    public Usuario fazerLogin (String email, String senha) throws EmailRepetidoException, BancoDeDadosException {
+        Usuario usuario = new Usuario();
+        usuario.setEmail(email);
+        usuario.setSenha(senha);
+        if (usuarioRepository.findByEmail(usuario)) {
+            if (usuarioRepository.findBySenha(usuario)) {
+                return usuario;
+            } else {
+                throw new EmailRepetidoException("Senha não existente, digitar novamente");
+            }
+        }
+        else {
+            throw new EmailRepetidoException("E-mail não existente, digitar novamente");
         }
     }
 }

@@ -61,10 +61,7 @@ public class Usuario implements Comprar, Vender {
         System.out.println("Venda feita com sucesso! ");
     }
 
-    public String getEmail() {
-
-        return email;
-    }
+    public String getEmail() {return email;}
 
     public String getNome() {
         return nome;

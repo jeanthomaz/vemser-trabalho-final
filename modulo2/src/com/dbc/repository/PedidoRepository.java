@@ -43,7 +43,6 @@ public class PedidoRepository implements Repositorio<Integer, Pedido> {
             stmt.setInt(2, pedido.getIdCupom());
             stmt.setInt(3, pedido.getIdUsuario());
             stmt.setDouble(3, pedido.getValorFinal());
-
             int res = stmt.executeUpdate();
             System.out.println("adicionarPedido.res=" + res);
             return pedido;
@@ -75,7 +74,6 @@ public class PedidoRepository implements Repositorio<Integer, Pedido> {
             // Executa-se a consulta
             int res = stmt.executeUpdate();
             System.out.println("removerPedidoPorId.res=" + res);
-
             return res > 0;
         } catch (SQLException e) {
             throw new BancoDeDadosException(e.getCause());
@@ -111,7 +109,6 @@ public class PedidoRepository implements Repositorio<Integer, Pedido> {
             // Executa-se a consulta
             int res = stmt.executeUpdate();
             System.out.println("editarPedido.res=" + res);
-
             return res > 0;
         } catch (SQLException e) {
             throw new BancoDeDadosException(e.getCause());
@@ -161,5 +158,4 @@ public class PedidoRepository implements Repositorio<Integer, Pedido> {
         }
         return pedidos;
     }
-
 }

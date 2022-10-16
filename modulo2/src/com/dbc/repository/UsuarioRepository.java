@@ -7,6 +7,7 @@ import java.sql.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class UsuarioRepository implements Repositorio<Integer, Usuario> {
 
@@ -201,6 +202,34 @@ public class UsuarioRepository implements Repositorio<Integer, Usuario> {
             ResultSet res = stmt.executeQuery(sql);
             res.next();
             existe = res.getString("email").isEmpty();
+        } catch (SQLException e) {
+            throw new BancoDeDadosException(e.getCause());
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return existe;
+    }
+
+    public boolean findBySenha(Usuario usuario) throws BancoDeDadosException{
+        List<Usuario> lista = new ArrayList<>();
+        Connection con = null;
+        boolean existe = false;
+        try {
+            con = ConexaoBancoDeDados.getConnection();
+            Statement stmt = con.createStatement();
+
+            String sql = "SELECT * FROM USUARIO" +
+                    " WHERE SENHA = ?";
+            // Executa-se a consulta
+            ResultSet res = stmt.executeQuery(sql);
+            res.next();
+            existe = res.getString("senha").isEmpty();
         } catch (SQLException e) {
             throw new BancoDeDadosException(e.getCause());
         } finally {
