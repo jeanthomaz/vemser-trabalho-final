@@ -4,6 +4,8 @@ import com.dbc.exceptions.*;
 import com.dbc.model.Usuario;
 import com.dbc.repository.UsuarioRepository;
 
+import java.util.Optional;
+
 public class UsuarioService {
     private UsuarioRepository usuarioRepository;
 
@@ -76,23 +78,28 @@ public class UsuarioService {
 //            throw new EmailRepetidoException("E-mail não existente, digitar novamente");
 //        }
 //    }
-    public Usuario fazerLogin(Usuario usuario){
+//    public Usuario fazerLogin(String email, String senha) throws EmailRepetidoException, BancoDeDadosException {
+//
+//        Usuario usuario = new Usuario();
+//        usuario.setEmail(email);
+//        usuario.setSenha(senha);
+//            if(!usuarioRepository.findByEmail(usuario)){
+//                if(!usuarioRepository.findBySenha(usuario)){
+//                    return usuarioRepository.selecionarUsuario(usuario);
+//                } else{
+//                    throw new EmailRepetidoException("Senha inválida!");
+//                }
+//            } else {
+//                throw new EmailRepetidoException("Email inválido!");
+//            }
+//        }
+        public Usuario verificarUsuario (Usuario usuario) {
         try {
-            if(usuario.getEmail() != null && usuarioRepository.findByEmail(usuario)){
-                if(usuario.getSenha() != null && usuarioRepository.findBySenha(usuario)){
-                    return usuarioRepository.selecionarUsuario(usuario);
-                } else{
-                    throw new Exception("Senha inválida!");
-                }
-            } else {
-                throw new Exception("Email inválido!");
-            }
-        } catch (BancoDeDadosException e){
-            e.printStackTrace();
-        } catch (Exception e){
+            return usuarioRepository.login(usuario);
+        } catch (BancoDeDadosException e) {
             System.out.println("ERRO: " + e.getMessage());
+            e.printStackTrace();
         }
-
-        return usuario;
+        return null;
+        }
     }
-}

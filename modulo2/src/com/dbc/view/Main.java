@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws BancoDeDadosException {
 
         Scanner scanner = new Scanner(System.in);
 
@@ -126,16 +126,14 @@ public class Main {
                     break;
                 }
 
-
                 case 5: {
                     Usuario usuario = new Usuario();
-                    usuario = fazerLogin(scanner, usuarioService);
+                    usuario = fazerLogin(usuarioService, scanner);
 
                     while(usuario == null) {
-                        usuario = fazerLogin(scanner, usuarioService);
+                        usuario = fazerLogin(usuarioService, scanner);
                     }
 
-                    System.out.println("---- Login efetuado com sucesso -----");
                     System.out.println("Digite 1 para listar os produtos disponiveis na loja");
                     System.out.println("Digite 2 para realizar um pedido");
                     System.out.println("Digite 3 para cadastrar um produto");
@@ -156,10 +154,8 @@ public class Main {
                             Pedido pedido = new Pedido();
                             produtoService.listarProdutos();
                             System.out.println("Escolha seu produto pelo ID");
-                            pedido.getp();
+                            pedido.getIdPedido();
                             pedidoService.adicionarPedido(pedido);
-
-
 
                         }
                         case 3 : {
@@ -235,14 +231,31 @@ public class Main {
             }
         }
     }
-}
 
-    public static Usuario fazerLogin(Scanner entrada, Usuario usuario, UsuarioService usuarioService) throws EmailRepetidoException {
-        System.out.println("Digite o email");
-        String email = entrada.nextLine();
-        System.out.println("Digite uma senha");
-        String senha = entrada.nextLine();
-        return usuarioService.fazerLogin(usuario);
+
+    public static Usuario fazerLogin(UsuarioService usuarioService, Scanner entrada){
+
+        Usuario usuario = new Usuario();
+        Usuario resultadoUser = null;
+        boolean a = true;
+        try{
+            while (a) {
+                System.out.println("Digite o email ");
+                usuario.setEmail(entrada.nextLine());
+                System.out.println("Senha:");
+                usuario.setSenha(entrada.nextLine());
+                Usuario usuarioEncontrado = usuarioService.verificarUsuario(usuario);
+                if (usuarioEncontrado.getEmail() != null && usuarioEncontrado.getSenha() != null) {
+                    System.out.println("\n"+usuario.getEmail() + " Logado com sucesso!");
+                    resultadoUser = usuarioEncontrado;
+                    a = false;
+                }
+            }
+        }catch (Exception ex){
+            System.out.println(ex.getMessage());
+        }
+        return resultadoUser;
     }
 }
+
 
