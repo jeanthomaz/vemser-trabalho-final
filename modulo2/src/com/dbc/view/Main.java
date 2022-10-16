@@ -145,106 +145,112 @@ public class Main {
                     while (usuario == null) {
                         usuario = fazerLogin(usuarioService, scanner);
                     }
+                    boolean verdade = true;
 
+                    while (verdade) {
                     System.out.println("Digite 1 para listar os produtos disponiveis na loja");
                     System.out.println("Digite 2 para realizar um pedido");
                     System.out.println("Digite 3 para cadastrar um produto");
                     System.out.println("Digite 4 para alterar informações de um produto já cadastrado por você");
                     System.out.println("Digite 5 para excluir um produto cadastrado por você da lista");
+                    System.out.println("Digite 6 para sair do login.");
 
                     escolha = scanner.nextInt();
-                    scanner.nextInt();
 
-                    switch (escolha) {
-                        case 1: {
-                            // listagem produtos
-                            produtoService.listarProdutos();
-                            break;
-                        }
-                        case 2: {
-                            //Realiza a compra dos pedidos
-                            ProdutoPedido produtoPedido = new ProdutoPedido();
-                            List<Produto> produtos = new ArrayList<>();
-                            System.out.println("Escolha seu produto pelo ID");
-                            boolean escolha = true;
-                            while(true){
-                                ProdutoPedidoRepository produtoPedidoRepository = new ProdutoPedidoRepository();
-                                produtoPedidoRepository.getProximoId();
+                        switch (escolha) {
+                            case 1: {
+                                //listagem produtos
+                                produtoService.listarProdutos();
+                                break;
                             }
-                            //adicionando os produtos dentro do pedido (Lista)
-                            // recuperar produtos e qtds, fazer o valor da qtd p/ tabela produto_pedido;
-                            //adicionar pedido, atualizando cada vez q fizer um novo pedido, atualiza o valor
-                            // td de uma vez, unico insert e deu;
-                            scanner.nextInt();
-                            pedido.getIdPedido(); //adicionando os pedidos na lista
-                            pedidoService.adicionarPedido(pedido);
-                            //
-
-                        }
-                        case 3: {
-
-                            // cadastro de produto
-                            Produto produto = new Produto();
-
-                            System.out.println("Digite o nome do produto: ");
-                            produto.setNome(scanner.nextLine());
-
-                            System.out.println("Digite a descrição do produto: ");
-                            produto.setDescricao(scanner.nextLine());
-
-                            System.out.println("Digite a quantidade de produtos: ");
-                            produto.setQuantidade(scanner.nextInt());
-
-                            System.out.println("Digite o tipo de produto (1-JOGOS 2-CONSOLE 3-COLECIONÁVEIS): ");
-                            produto.setTipo(Tipos.ofTipo(scanner.nextLine()));
-                            scanner.nextLine();
-
-                            System.out.println("Digite o valor do produto por unidade: ");
-                            produto.setValor(scanner.nextDouble());
-                            break;
-                        }
-                        case 4: {
-                            // edição de produto
-                            System.out.println("Qual Produto você deseja editar ?");
-                            produtoService.listarProdutos();
-
-                            Produto editarproduto = new Produto();
-                            scanner.nextLine();
-
-                            System.out.println("Digite o nome do produto: ");
-                            editarproduto.setNome(scanner.nextLine());
-
-                            System.out.println("Digite a descrição do produto: ");
-                            editarproduto.setDescricao(scanner.nextLine());
-
-                            System.out.println("Digite a quantidade de produtos: ");
-                            editarproduto.setQuantidade(scanner.nextInt());
-
-                            System.out.println("Digite o tipo de produto (1-JOGOS 2-CONSOLE 3-COLECIONÁVEIS): ");
-                            editarproduto.setTipo(Tipos.ofTipo(scanner.nextLine()));
-                            scanner.nextLine();
-
-                            System.out.println("Digite o valor do produto por unidade: ");
-                            editarproduto.setValor(scanner.nextDouble());
-                            break;
-                        }
-                        case 5: {
-                            // exclusão de produto
-                            System.out.println("Qual produto você deseja excluir?");
-                            produtoService.listarProdutos();
-                            boolean validouNumero = false;
-                            while (!validouNumero) {
-                                try {
-                                    int id = scanner.nextInt();
-                                    produtoService.removerProduto(id);
-                                    validouNumero = true;
-                                } catch (InputMismatchException ex) {
-                                    System.err.println("numero invalido");
+                            case 2: {
+                                //Realiza a compra dos pedidos
+                                ProdutoPedido produtoPedido = new ProdutoPedido();
+                                Pedido pedido = new Pedido();
+                                while (true) {
+                                    System.out.println("Escolha seu produto pelo ID");
+                                    int valor = scanner.nextInt();
                                 }
+                                //adicionando os produtos dentro do pedido (Lista)
+                                // recuperar produtos e qtds, fazer o valor da qtd p/ tabela produto_pedido;
+                                //adicionar pedido, atualizando cada vez q fizer um novo pedido, atualiza o valor
+                                // td de uma vez, unico insert e deu;
+
+//                                pedido.getIdPedido(); //adicionando os pedidos na lista
+//                                pedidoService.adicionarPedido(pedido);
+                                //
+
                             }
-                            break;
+                            case 3: {
+
+                                // cadastro de produto
+                                Produto produto = new Produto();
+
+                                System.out.println("Digite o nome do produto: ");
+                                produto.setNome(scanner.nextLine());
+
+                                System.out.println("Digite a descrição do produto: ");
+                                produto.setDescricao(scanner.nextLine());
+
+                                System.out.println("Digite a quantidade de produtos: ");
+                                produto.setQuantidade(scanner.nextInt());
+
+                                System.out.println("Digite o tipo de produto (1-JOGOS 2-CONSOLE 3-COLECIONÁVEIS): ");
+                                produto.setTipo(Tipos.ofTipo(scanner.nextLine()));
+                                scanner.nextLine();
+
+                                System.out.println("Digite o valor do produto por unidade: ");
+                                produto.setValor(scanner.nextDouble());
+                                break;
+                            }
+                            case 4: {
+                                // edição de produto
+                                System.out.println("Qual Produto você deseja editar ?");
+                                produtoService.listarProdutos();
+
+                                Produto editarproduto = new Produto();
+                                scanner.nextLine();
+
+                                System.out.println("Digite o nome do produto: ");
+                                editarproduto.setNome(scanner.nextLine());
+
+                                System.out.println("Digite a descrição do produto: ");
+                                editarproduto.setDescricao(scanner.nextLine());
+
+                                System.out.println("Digite a quantidade de produtos: ");
+                                editarproduto.setQuantidade(scanner.nextInt());
+
+                                System.out.println("Digite o tipo de produto (1-JOGOS 2-CONSOLE 3-COLECIONÁVEIS): ");
+                                editarproduto.setTipo(Tipos.ofTipo(scanner.nextLine()));
+                                scanner.nextLine();
+
+                                System.out.println("Digite o valor do produto por unidade: ");
+                                editarproduto.setValor(scanner.nextDouble());
+                                break;
+                            }
+                            case 5: {
+                                // exclusão de produto
+                                System.out.println("Qual produto você deseja excluir?");
+                                produtoService.listarProdutos();
+                                boolean validouNumero = false;
+                                while (!validouNumero) {
+                                    try {
+                                        int id = scanner.nextInt();
+                                        produtoService.removerProduto(id);
+                                        validouNumero = true;
+                                    } catch (InputMismatchException ex) {
+                                        System.err.println("numero invalido");
+                                    }
+                                }
+                                break;
+                            }
+
+                            case 6: {
+                                verdade = false;
+                                break;
+                            }
                         }
-                    }
+                }
                 }
                 case 0:
                     break;
