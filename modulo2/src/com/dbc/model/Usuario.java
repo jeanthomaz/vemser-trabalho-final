@@ -1,6 +1,6 @@
 package com.dbc.model;
 
-public class Usuario implements Comprar, Vender {
+public class Usuario {
 
     private Integer idUsuario;
     private String email;
@@ -15,13 +15,13 @@ public class Usuario implements Comprar, Vender {
     private String estado;
     private Integer telefone;
 
-    Usuario usuario;
+    private String deletado;
 
     public Usuario(){
 
     }
 
-    public Usuario(Integer id, String email, String senha, String pix, String nome, String endereco, Integer cpf, String cidade, String estado, Integer telefone, Usuario usuario) {
+    public Usuario(Integer id, String email, String senha, String pix, String nome, String endereco, Integer cpf, String cidade, String estado, Integer telefone, String deletado) {
         this.idUsuario = id;
         this.email = email;
         this.senha = senha;
@@ -32,33 +32,40 @@ public class Usuario implements Comprar, Vender {
         this.cidade = cidade;
         this.estado = estado;
         this.telefone = telefone;
-        this.usuario = usuario;
+        this.deletado = deletado;
+    }
+
+    public String getDeletado() {
+        return deletado;
+    }
+
+    public void setDeletado(String deletado) {
+        this.deletado = deletado;
     }
 
     @Override
     public String toString() {
-        return "Cliente{" +
-                "email='" + email + '\'' +
+        return "Usuario{" +
+                "idUsuario=" + idUsuario +
+                ", email='" + email + '\'' +
                 ", senha='" + senha + '\'' +
                 ", pix='" + pix + '\'' +
                 ", nome='" + nome + '\'' +
                 ", endereco='" + endereco + '\'' +
-                ", cpf='" + cpf + '\'' +
+                ", cpf=" + cpf +
                 ", cidade='" + cidade + '\'' +
                 ", estado='" + estado + '\'' +
-                ", telefone='" + telefone + '\'' +
-                ", cliente=" + usuario +
+                ", telefone=" + telefone +
+                ", deletado='" + deletado + '\'' +
                 '}';
     }
 
-    @Override
-    public void comprar() {
-        System.out.println("Compra realizada com sucesso.");
-    }
-
-    @Override
     public void vender() {
         System.out.println("Venda feita com sucesso! ");
+    }
+
+    public void comprar() {
+        System.out.println("Compra feita com sucesso!");
     }
 
     public String getEmail() {return email;}

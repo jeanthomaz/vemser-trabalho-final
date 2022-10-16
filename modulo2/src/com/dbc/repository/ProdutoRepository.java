@@ -1,6 +1,7 @@
 package com.dbc.repository;
 
-import com.dbc.exceptions.BancoDeDadosException;
+import com.dbc.enums.Tipos;
+import com.dbc.exceptions.*;
 import com.dbc.model.Usuario;
 import com.dbc.model.Produto;
 
@@ -38,8 +39,8 @@ public class ProdutoRepository implements Repositorio<Integer, Produto> {
             produto.setIdProduto(proximoId);
 
             String sql = "INSERT INTO PRODUTO\n" +
-                    "(ID_PRODUTO,NOME,DESCRICAO,QUANTIDADE,TIPO,VALOR,ID_USUARIO)\n" +
-                    "VALUES(?, ?, ?, ?, ?, ?, ?)\n";
+                    "(ID_PRODUTO,NOME,DESCRICAO,QUANTIDADE,TIPO,VALOR,ID_USUARIO,DELETADO)\n" +
+                    "VALUES(?, ?, ?, ?, ?, ?, ?,?)\n";
 
             PreparedStatement stmt = con.prepareStatement(sql);
 
@@ -50,6 +51,7 @@ public class ProdutoRepository implements Repositorio<Integer, Produto> {
             stmt.setInt(5,produto.getTipo().getTipos());
             stmt.setDouble(6,produto.getValor());
             stmt.setInt(7,produto.getIdUsuario());
+            stmt.setString(8,produto.getDeletado());
 
             int res = stmt.executeUpdate();
             System.out.println("adicionarProduto.res=" + res);
@@ -111,6 +113,7 @@ public class ProdutoRepository implements Repositorio<Integer, Produto> {
             sql.append(" TIPO = ? ");
             sql.append(" VALOR = ? ");
             sql.append(" ID_USUARIO = ? ");
+            sql.append(" DELETADO = ? ");
             sql.append(" WHERE ID_PRODUTO = ? ");
 
             PreparedStatement stmt = con.prepareStatement(sql.toString());
@@ -122,6 +125,7 @@ public class ProdutoRepository implements Repositorio<Integer, Produto> {
             stmt.setInt(5,produto.getTipo().getTipos());
             stmt.setDouble(6,produto.getValor());
             stmt.setInt(7,produto.getIdUsuario());
+            stmt.setString(8,produto.getDeletado());
 
             // Executa-se a consulta
             int res = stmt.executeUpdate();
@@ -161,8 +165,10 @@ public class ProdutoRepository implements Repositorio<Integer, Produto> {
                 produto.setNome(res.getString("NOME"));
                 produto.setDescricao(res.getString("DESCRICAO"));
                 produto.setQuantidade(res.getInt("QUANTIDADE"));
+                produto.setTipo(Tipos.valueOf(res.getString("TIPO")));
                 produto.setValor(res.getDouble("VALOR"));
                 produto.setIdUsuario(res.getInt("ID_USUARIO"));
+                produto.setDeletado(res.getString("DELETADO" ));
                 produtos.add(produto);
             }
         } catch (SQLException e) {

@@ -1,6 +1,6 @@
 package com.dbc.repository;
 
-import com.dbc.exceptions.BancoDeDadosException;
+import com.dbc.exceptions.*;
 import com.dbc.model.Cupom;
 
 import java.sql.*;
@@ -32,14 +32,14 @@ public class CupomRepository implements Repositorio<Integer, Cupom> {
             cupom.setIdCupom(proximoId);
 
             String sql = "INSERT INTO CUPOM\n" +
-                    "(ID_CUPOM,DESCONTO,VALIDADE)\n" +
+                    "(ID_CUPOM,DESCONTO,DELETADO)\n" +
                     "VALUES(?, ?, ?)\n";
 
             PreparedStatement stmt = con.prepareStatement(sql);
 
             stmt.setInt(1, cupom.getIdCupom());
             stmt.setDouble(2, cupom.getValor());
-            stmt.setString(3, cupom.getValidade());
+            stmt.setString(3, cupom.getDeletado());
 
             int res = stmt.executeUpdate();
             System.out.println("adicionarCupom.res=" + res);
@@ -96,13 +96,13 @@ public class CupomRepository implements Repositorio<Integer, Cupom> {
             StringBuilder sql = new StringBuilder();
             sql.append("UPDATE CUPOM SET ");
             sql.append(" VALOR = ?,");
-            sql.append(" VALIDADE = ?,");
+            sql.append(" DELETADO = ?,");
 
             PreparedStatement stmt = con.prepareStatement(sql.toString());
 
             stmt.setInt(1, cupom.getIdCupom());
             stmt.setDouble(2, cupom.getValor());
-            stmt.setString(3, cupom.getValidade());
+            stmt.setString(3, cupom.getDeletado());
 
             // Executa-se a consulta
             int res = stmt.executeUpdate();
@@ -140,7 +140,7 @@ public class CupomRepository implements Repositorio<Integer, Cupom> {
                 Cupom cupom = new Cupom();
                 cupom.setIdCupom(res.getInt("ID_CUPOM"));
                 cupom.setValor(res.getDouble("VALOR"));
-                cupom.setValidade(res.getString("VALIDADE"));
+                cupom.setDeletado(res.getString("DELETADO"));
                 cupons.add(cupom);
             }
         } catch (SQLException e) {

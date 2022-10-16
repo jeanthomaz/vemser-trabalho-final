@@ -3,8 +3,9 @@ package com.dbc.model;
 public class Cupom {
 
     private int idCupom;
-    private double valor; //TESTE CRUD VALOR > 0
-    private String validade; //TESTE CRUD BOOLEAN VALIDO
+    private double valor;
+
+    private String deletado;
 
 
     public Cupom(){
@@ -13,19 +14,19 @@ public class Cupom {
 
     public Cupom(double valor, String validade) {
         this.valor = valor;
-        this.validade = validade;
+        this.deletado = validade;
     }
 
     public void imprimirCupom(){
         System.out.println("com.dbc.model.Cupom de desconto de " + valor * 100 + "%");
-        System.out.println("Ainda é autenticável: " + validade);
+        System.out.println("Ainda é autenticável: " + deletado);
     }
 
     @Override
     public String toString() {
         return "com.dbc.model.Cupom{" +
                 "valor=" + valor +
-                ", validade=" + validade +
+                ", validade=" + deletado +
                 '}';
     }
 
@@ -45,11 +46,11 @@ public class Cupom {
         this.valor = valor;
     }
 
-    public String getValidade() {
-        return validade;
+    public String getDeletado() {
+        return deletado;
     }
 
-    public void setValidade(String validade) {
-        this.validade = validade;
+    public void setDeletado(String validade) {
+        this.deletado = validade;
     }
 }

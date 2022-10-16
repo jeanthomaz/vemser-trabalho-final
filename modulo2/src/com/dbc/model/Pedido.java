@@ -13,15 +13,20 @@ public class Pedido {
     private int idUsuario;
     private double valorFinal;
 
+    private String deletado;
+
     public Pedido() {
 
     }
 
-    public Pedido(int idPedido, int idCupom, int idUsuario, double valorFinal) {
+    public Pedido(List<Produto> produtos, Cupom cupom, int idPedido, int idCupom, int idUsuario, double valorFinal, String deletado) {
+        this.produtos = produtos;
+        this.cupom = cupom;
         this.idPedido = idPedido;
         this.idCupom = idCupom;
         this.idUsuario = idUsuario;
         this.valorFinal = valorFinal;
+        this.deletado = deletado;
     }
 
     @Override
@@ -33,6 +38,7 @@ public class Pedido {
                 ", idCupom=" + idCupom +
                 ", idUsuario=" + idUsuario +
                 ", valorFinal=" + valorFinal +
+                ", deletado='" + deletado + '\'' +
                 '}';
     }
 
@@ -89,9 +95,9 @@ public class Pedido {
             double aux = 0;
             for (Produto value : produtos) {
                 aux += value.getValor() * value.getQuantidade();
-                if (cupom.getValidade() == "1") {
+                if (cupom.getDeletado() == "F") {
                     double valorFinal = aux - cupom.getValor();
-                } else if (cupom.getValidade() == "0") {
+                } else if (cupom.getDeletado() == "T") {
                     double valorFinal = aux;
                 } else {
                     double valorFinal = 0;
@@ -99,5 +105,13 @@ public class Pedido {
             }
         }
         return 0;
+    }
+
+    public String getDeletado() {
+        return deletado;
+    }
+
+    public void setDeletado(String deletado) {
+        this.deletado = deletado;
     }
 }

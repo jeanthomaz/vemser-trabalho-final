@@ -1,6 +1,6 @@
 package com.dbc.repository;
 
-import com.dbc.exceptions.BancoDeDadosException;
+import com.dbc.exceptions.*;
 import com.dbc.model.Usuario;
 
 import java.sql.*;
@@ -36,7 +36,7 @@ public class UsuarioRepository implements Repositorio<Integer, Usuario> {
             usuario.setIdUsuario(proximoId);
 
             String sql = "INSERT INTO PESSOA\n" +
-                    "(ID_USUARIO,PIX,EMAIL,SENHA ,NOME,ENDERECO,CPF,CIDADE,ESTADO,TELEFONE)\n" +
+                    "(ID_USUARIO,PIX,EMAIL,SENHA ,NOME,ENDERECO,CPF,CIDADE,ESTADO,TELEFONE, DELETADO)\n" +
                     "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)\n";
 
             PreparedStatement stmt = con.prepareStatement(sql);
@@ -51,6 +51,7 @@ public class UsuarioRepository implements Repositorio<Integer, Usuario> {
             stmt.setString(8, usuario.getCidade());
             stmt.setString(9, usuario.getEstado());
             stmt.setInt(10, usuario.getTelefone());
+            stmt.setString(11, usuario.getDeletado());
 
             int res = stmt.executeUpdate();
             System.out.println("adicionarUsuario.res=" + res);
@@ -115,6 +116,7 @@ public class UsuarioRepository implements Repositorio<Integer, Usuario> {
             sql.append(" cidade = ?,");
             sql.append(" esatado = ?,");
             sql.append(" telefone = ?,");
+            sql.append(" deletado = ?, ");
             sql.append(" WHERE id_usuario = ? ");
 
             PreparedStatement stmt = con.prepareStatement(sql.toString());
@@ -129,6 +131,7 @@ public class UsuarioRepository implements Repositorio<Integer, Usuario> {
             stmt.setString(8, usuario.getCidade());
             stmt.setString(9, usuario.getEstado());
             stmt.setInt(10, usuario.getTelefone());
+            stmt.setString(11, usuario.getDeletado());
 
             // Executa-se a consulta
             int res = stmt.executeUpdate();
@@ -163,6 +166,7 @@ public class UsuarioRepository implements Repositorio<Integer, Usuario> {
 
             while (res.next()) {
                 Usuario usuario = new Usuario();
+            if(usuario.getDeletado().equals("T")) {
                 usuario.setIdUsuario(res.getInt("id_pessoa"));
                 usuario.setPix(res.getString("pix"));
                 usuario.setEmail(res.getString("email"));
@@ -173,6 +177,7 @@ public class UsuarioRepository implements Repositorio<Integer, Usuario> {
                 usuario.setEstado(res.getString("estado"));
                 usuario.setTelefone(res.getInt("telefone"));
                 usuarios.add(usuario);
+            }
             }
         } catch (SQLException e) {
             throw new BancoDeDadosException(e.getCause());

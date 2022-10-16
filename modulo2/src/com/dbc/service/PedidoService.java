@@ -1,6 +1,6 @@
 package com.dbc.service;
 
-import com.dbc.exceptions.BancoDeDadosException;
+import com.dbc.exceptions.*;
 import com.dbc.model.Pedido;
 import com.dbc.repository.PedidoRepository;
 

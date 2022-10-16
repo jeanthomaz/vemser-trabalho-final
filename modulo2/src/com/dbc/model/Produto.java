@@ -12,13 +12,15 @@ public class Produto {
     private double valor;
     private int idUsuario;
 
+    private String deletado;
+
     Usuario usuario;
 
     public Produto(){
 
     }
 
-    public Produto(Integer idProduto, String nome, String descricao, int quantidade, Tipos tipo, double valor, int idUsuario) {
+    public Produto(Integer idProduto, String nome, String descricao, int quantidade, Tipos tipo, double valor, int idUsuario, String deletado) {
         this.idProduto = idProduto;
         this.nome = nome;
         this.descricao = descricao;
@@ -26,6 +28,7 @@ public class Produto {
         this.tipo = tipo;
         this.valor = valor;
         this.idUsuario = idUsuario;
+        this.deletado = deletado;
     }
 
     @Override
@@ -38,7 +41,16 @@ public class Produto {
                 ", tipo=" + tipo +
                 ", valor=" + valor +
                 ", idUsuario=" + idUsuario +
+                ", deletado=" + deletado +
                 '}';
+    }
+
+    public String getDeletado() {
+        return deletado;
+    }
+
+    public void setDeletado(String deletado) {
+        this.deletado = deletado;
     }
 
     public Integer getIdProduto() {
@@ -97,8 +109,4 @@ public class Produto {
         this.idUsuario = idUsuario;
     }
 
-    //Não utilizado
-    public Usuario getUsuario() {
-        return usuario;
-    }
 }

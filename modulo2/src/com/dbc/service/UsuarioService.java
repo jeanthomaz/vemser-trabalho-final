@@ -1,9 +1,8 @@
 package com.dbc.service;
 
-import com.dbc.exceptions.BancoDeDadosException;
+import com.dbc.exceptions.*;
 import com.dbc.model.Usuario;
 import com.dbc.repository.UsuarioRepository;
-import com.dbc.exceptions.EmailRepetidoException;
 
 import java.util.List;
 import java.util.Optional;

@@ -34,7 +34,7 @@ public class PedidoRepository implements Repositorio<Integer, Pedido> {
             pedido.setIdPedido(proximoId);
 
             String sql = "INSERT INTO PEDIDO\n" +
-                    "(ID_PEDIDO,ID_CUPOM,ID_USUARIO,VALOR_FINAL)\n" +
+                    "(ID_PEDIDO,ID_CUPOM,ID_USUARIO,VALOR_FINAL, DELETADO)\n" +
                     "VALUES(?, ?, ?, ?)\n";
 
             PreparedStatement stmt = con.prepareStatement(sql);
@@ -42,7 +42,8 @@ public class PedidoRepository implements Repositorio<Integer, Pedido> {
             stmt.setInt(1, pedido.getIdPedido());
             stmt.setInt(2, pedido.getIdCupom());
             stmt.setInt(3, pedido.getIdUsuario());
-            stmt.setDouble(3, pedido.getValorFinal());
+            stmt.setDouble(4, pedido.getValorFinal());
+            stmt.setString(5, pedido.getDeletado());
             int res = stmt.executeUpdate();
             System.out.println("adicionarPedido.res=" + res);
             return pedido;
@@ -99,12 +100,14 @@ public class PedidoRepository implements Repositorio<Integer, Pedido> {
             sql.append(" ID_CUPOM = ?,");
             sql.append(" ID_USUARIO = ?,");
             sql.append(" VALOR_FINAL = ?,");
+            sql.append(" DELETADO = ?, ");
 
             PreparedStatement stmt = con.prepareStatement(sql.toString());
 
             stmt.setInt(1, pedido.getIdCupom());
             stmt.setInt(2, pedido.getIdUsuario());
             stmt.setDouble(3, pedido.getValorFinal());
+            stmt.setString(4,pedido.getDeletado());
 
             // Executa-se a consulta
             int res = stmt.executeUpdate();
@@ -139,11 +142,13 @@ public class PedidoRepository implements Repositorio<Integer, Pedido> {
 
             while (res.next()) {
                 Pedido pedido = new Pedido();
-                pedido.setIdPedido(res.getInt("ID_PEDIDO"));
-                pedido.setIdCupom(res.getInt("ID_CUPOM"));
-                pedido.setIdUsuario(res.getInt("ID_USUARIO"));
-                pedido.setValorFinal(res.getDouble("VALOR_FINAL"));
-                pedidos.add(pedido);
+                if(pedido.getDeletado().equals("F")) {
+                    pedido.setIdPedido(res.getInt("ID_PEDIDO"));
+                    pedido.setIdCupom(res.getInt("ID_CUPOM"));
+                    pedido.setIdUsuario(res.getInt("ID_USUARIO"));
+                    pedido.setValorFinal(res.getDouble("VALOR_FINAL"));
+                    pedidos.add(pedido);
+                }
             }
         } catch (SQLException e) {
             throw new BancoDeDadosException(e.getCause());
