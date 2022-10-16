@@ -352,11 +352,13 @@ public class UsuarioRepository implements Repositorio<Integer, Usuario> {
 
             ResultSet res = stmt.executeQuery();
 
-            while (res.next()) {
-                usuario.setIdUsuario(res.getInt("id_pessoa"));
+//            if(res.next()) {
+                res.next();
+                System.out.println("testando");
+                usuario.setIdUsuario(res.getInt("id_usuario"));
                 usuario.setPix(res.getString("pix"));
                 usuario.setEmail(res.getString("email"));
-                usuario.setEmail(res.getString("senha"));
+                usuario.setSenha(res.getString("senha"));
                 usuario.setNome(res.getString("nome"));
                 usuario.setEndereco(res.getString("endereco"));
                 usuario.setCpf(res.getString("cpf"));
@@ -364,7 +366,7 @@ public class UsuarioRepository implements Repositorio<Integer, Usuario> {
                 usuario.setEstado(res.getString("estado"));
                 usuario.setTelefone(res.getString("telefone"));
                 usuario.setDeletado(res.getString("deletado"));
-            }
+//            }
             System.out.println("Usuário consultado!!");
 
         } catch (SQLException e){

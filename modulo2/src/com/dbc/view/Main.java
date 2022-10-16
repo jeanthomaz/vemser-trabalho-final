@@ -8,6 +8,7 @@ import com.dbc.repository.*;
 import com.dbc.service.*;
 
 import java.util.InputMismatchException;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Main {
@@ -24,12 +25,13 @@ public class Main {
         //EDITAR DAQUI PRA BAIXO ///
 
        usuarioService.listar();
-        pedidoService.listarPedido();
+       pedidoService.listarPedido();
 
         int opcao = -1;
         int escolha = 9;
         int choise = -1;
 
+        usuarioService.listar();
         // remover é dar um setDeletado para "T"//
         while (opcao != 0) {
             System.out.println("Digite 1 para realizar seu cadastro");
@@ -238,17 +240,18 @@ public class Main {
 
         Usuario usuario = new Usuario();
         Usuario resultadoUser = null;
-        boolean a = true;
+
         try{
-            while (a) {
+            while (true) {
                 System.out.println("Digite o email ");
                 usuario.setEmail(entrada.nextLine());
-                System.out.println("Senha:");
+                System.out.println("Digite a senha:");
                 usuario.setSenha(entrada.nextLine());
                 Usuario usuarioEncontrado = usuarioService.verificarUsuario(usuario);
-                if (usuarioEncontrado.getEmail() != null && usuarioEncontrado.getSenha() != null) {
+                if (usuarioEncontrado.getEmail().equals(usuario.getEmail()) && usuarioEncontrado.getSenha().equals(usuario.getSenha())) {
                     System.out.println("\n"+usuario.getEmail() + " Logado com sucesso!");
                     resultadoUser = usuarioEncontrado;
+                    break;
                 }
             }
         }catch (Exception ex){
