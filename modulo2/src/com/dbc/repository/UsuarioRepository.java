@@ -115,10 +115,10 @@ public class UsuarioRepository implements Repositorio<Integer, Usuario> {
             sql.append(" endereco = ?,");
             sql.append(" cpf = ?,");
             sql.append(" cidade = ?,");
-            sql.append(" esatado = ?,");
+            sql.append(" estado = ?,");
             sql.append(" telefone = ?,");
-            sql.append(" deletado = ?, ");
-            sql.append(" WHERE id_usuario = ? ");
+            sql.append(" deletado = ? ");
+            sql.append(" WHERE id_usuario = ?");
 
             PreparedStatement stmt = con.prepareStatement(sql.toString());
 

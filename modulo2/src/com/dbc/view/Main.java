@@ -24,14 +24,14 @@ public class Main {
 
         //EDITAR DAQUI PRA BAIXO ///
 
-       usuarioService.listar();
-       pedidoService.listarPedido();
+//       usuarioService.listar();
+//       pedidoService.listarPedido();
 
         int opcao = -1;
         int escolha = 9;
         int choise = -1;
 
-        usuarioService.listar();
+//        usuarioService.listar();
         // remover é dar um setDeletado para "T"//
         while (opcao != 0) {
             System.out.println("Digite 1 para realizar seu cadastro");
@@ -85,6 +85,9 @@ public class Main {
                     scanner.nextLine();
 
                     Usuario newUser = new Usuario();
+
+                    newUser.setIdUsuario(index);
+
                     System.out.println("Digite o seu nome: ");
                     newUser.setNome(scanner.nextLine());
 
@@ -111,6 +114,9 @@ public class Main {
 
                     System.out.println("Digite o seu pix: ");
                     newUser.setPix(scanner.nextLine());
+
+                    System.out.println("O usuário é válido ? Digite F para válido e T para inválido");
+                    newUser.setDeletado(scanner.nextLine());
 
                     usuarioService.editar(index, newUser);
                     break;
