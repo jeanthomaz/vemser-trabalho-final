@@ -197,19 +197,20 @@ public class Main {
                                 }
                                 System.out.println("PRODUTOS SELECIONADOS COM SUCESSO");
                                 System.out.println(pedido);
-//                                System.out.println("---------------------------------");
-//                                System.out.println("Escolha um cupom para adicionar");
-//                                cupomService.listarCupons().forEach(System.out::println);
-//                                Integer cupomSelecionado = scanner.nextInt();
-//                                scanner.nextLine();
-//                                List<Cupom> listaCupons = cupomService.listarCupons();
-//                                Cupom cupom3 = listaCupons.stream()
-//                                        .filter(cupom -> cupom.getIdCupom().equals(cupomSelecionado))
-//                                        .findFirst()
-//                                        .get();
-//                                pedido.setCupom(cupom3);
-//                                System.out.println(pedido);
-//                                scanner.nextLine();
+                                System.out.println("---------------------------------");
+                                System.out.println("Escolha um cupom para adicionar");
+                                cupomService.listarCupons().forEach(System.out::println);
+                                Integer cupomSelecionado = scanner.nextInt();
+                                scanner.nextLine();
+                                List<Cupom> listaCupons = cupomService.listarCupons();
+                                Cupom cupom3 = listaCupons.stream()
+                                        .filter(cupom -> cupom.getIdCupom().equals(cupomSelecionado))
+                                        .findFirst()
+                                        .get();
+                                Pedido pedidoCriado = pedidoService.adicionarPedido(pedido);
+                                pedidoCriado.setCupom(cupom3);
+                                System.out.println(pedidoCriado);
+                                scanner.nextLine();
                                 break;
 
                             }
