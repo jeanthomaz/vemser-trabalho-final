@@ -47,10 +47,10 @@ public class ProdutoService {
     }
 
     // leitura
-    public void listarProdutos() {
+    public List<Produto> listarProdutos() {
         try {
             List<Produto> listar = produtoRepository.listar();
-            listar.forEach(System.out::println);
+            return listar;
         } catch (BancoDeDadosException e) {
             throw new RuntimeException(e.getCause());
         }

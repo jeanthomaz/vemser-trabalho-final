@@ -49,10 +49,10 @@ public class CupomService {
     }
 
     // leitura
-    public void listarCupons() {
+    public List<Cupom> listarCupons() {
         try {
             List<Cupom> listar = cupomRepository.listar();
-            listar.forEach(System.out::println);
+            return listar;
         } catch (BancoDeDadosException e) {
             throw new RuntimeException(e.getCause());
         }

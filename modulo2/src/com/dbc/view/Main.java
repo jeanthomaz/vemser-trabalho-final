@@ -8,6 +8,7 @@ import com.dbc.service.*;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.SQLOutput;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -148,37 +149,68 @@ public class Main {
                     boolean verdade = true;
 
                     while (verdade) {
-                    System.out.println("Digite 1 para listar os produtos disponiveis na loja");
-                    System.out.println("Digite 2 para realizar um pedido");
-                    System.out.println("Digite 3 para cadastrar um produto");
-                    System.out.println("Digite 4 para alterar informações de um produto já cadastrado por você");
-                    System.out.println("Digite 5 para excluir um produto cadastrado por você da lista");
-                    System.out.println("Digite 6 para sair do login.");
+                        System.out.println("Digite 1 para listar os produtos disponiveis na loja");
+                        System.out.println("Digite 2 para realizar um pedido");
+                        System.out.println("Digite 3 para cadastrar um produto");
+                        System.out.println("Digite 4 para alterar informações de um produto já cadastrado por você");
+                        System.out.println("Digite 5 para excluir um produto cadastrado por você da lista");
+                        System.out.println("Digige 6 para listar os produtos do Usuario");
+                        System.out.println("Digite 7 para sair do login.");
 
-                    escolha = scanner.nextInt();
+                        escolha = scanner.nextInt();
 
                         switch (escolha) {
                             case 1: {
                                 //listagem produtos
-                                produtoService.listarProdutos();
+                                List<Produto> listaProdutos = produtoService.listarProdutos();
+                                listaProdutos.forEach(System.out::println);
                                 break;
                             }
                             case 2: {
                                 //Realiza a compra dos pedidos
-                                ProdutoPedido produtoPedido = new ProdutoPedido();
                                 Pedido pedido = new Pedido();
+                                pedido.setIdUsuario(usuario.getIdUsuario());
+                                List<Produto> listaProdutos = produtoService.listarProdutos();
                                 while (true) {
-                                    System.out.println("Escolha seu produto pelo ID");
-                                    int valor = scanner.nextInt();
-                                }
-                                //adicionando os produtos dentro do pedido (Lista)
-                                // recuperar produtos e qtds, fazer o valor da qtd p/ tabela produto_pedido;
-                                //adicionar pedido, atualizando cada vez q fizer um novo pedido, atualiza o valor
-                                // td de uma vez, unico insert e deu;
+                                    listaProdutos.forEach(System.out::println);
+                                    ProdutoPedido produtoPedido = new ProdutoPedido();
+                                    System.out.println("Escolha seu produto pelo ID ou 0 para finalizar");
+                                    Integer idProduto = scanner.nextInt();
+                                    scanner.nextLine();
+                                    if(idProduto == 0){
+                                        break;
+                                    }
+                                    System.out.println("Digite a quantidade desejada: ");
+                                    Integer quantidadeDesejada = scanner.nextInt();
+                                    scanner.nextLine();
 
-//                                pedido.getIdPedido(); //adicionando os pedidos na lista
-//                                pedidoService.adicionarPedido(pedido);
-                                //
+                                    Produto produtoSelecionado = listaProdutos.stream()
+                                            .filter(produto -> produto.getIdProduto().equals(idProduto))
+                                            .findFirst()
+                                            .get();
+
+                                    produtoPedido.setProduto(produtoSelecionado);
+                                    produtoPedido.setQuantidade(quantidadeDesejada);
+                                    produtoPedido.setValor(produtoSelecionado.getValor()*quantidadeDesejada);
+                                    pedido.getProdutosPedido().add(produtoPedido);
+                                    System.out.println(produtoPedido);
+                                }
+                                System.out.println("PRODUTOS SELECIONADOS COM SUCESSO");
+                                System.out.println(pedido);
+//                                System.out.println("---------------------------------");
+//                                System.out.println("Escolha um cupom para adicionar");
+//                                cupomService.listarCupons().forEach(System.out::println);
+//                                Integer cupomSelecionado = scanner.nextInt();
+//                                scanner.nextLine();
+//                                List<Cupom> listaCupons = cupomService.listarCupons();
+//                                Cupom cupom3 = listaCupons.stream()
+//                                        .filter(cupom -> cupom.getIdCupom().equals(cupomSelecionado))
+//                                        .findFirst()
+//                                        .get();
+//                                pedido.setCupom(cupom3);
+//                                System.out.println(pedido);
+//                                scanner.nextLine();
+                                break;
 
                             }
                             case 3: {
@@ -213,6 +245,7 @@ public class Main {
 
                                 System.out.println("Digite o nome do produto: ");
                                 editarproduto.setNome(scanner.nextLine());
+                                scanner.nextLine();
 
                                 System.out.println("Digite a descrição do produto: ");
                                 editarproduto.setDescricao(scanner.nextLine());
@@ -246,11 +279,16 @@ public class Main {
                             }
 
                             case 6: {
+                                pedidoService.listarPedido();
+                                break;
+                            }
+
+                            case 7: {
                                 verdade = false;
                                 break;
                             }
                         }
-                }
+                    }
                 }
                 case 0:
                     break;

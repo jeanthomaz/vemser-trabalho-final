@@ -17,7 +17,7 @@ public class Produto {
     Usuario usuario;
 
     public Produto(){
-
+        this.setDeletado("F");
     }
 
     public Produto(Integer idProduto, String nome, String descricao, int quantidade, Tipos tipo, double valor, int idUsuario, String deletado) {

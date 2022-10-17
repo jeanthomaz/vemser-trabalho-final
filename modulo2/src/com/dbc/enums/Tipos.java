@@ -3,9 +3,9 @@ package com.dbc.enums;
 import java.util.Arrays;
 
 public enum Tipos {
-    JOGOS("1"),
-    CONSOLE("2"),
-    COLECIONAVEL("3");
+    JOGOS("0"),
+    CONSOLE("1"),
+    COLECIONAVEL("2");
 
     private String tipo;
 

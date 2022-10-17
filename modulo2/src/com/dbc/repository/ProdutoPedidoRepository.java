@@ -34,16 +34,17 @@ public class ProdutoPedidoRepository implements Repositorio<Integer, ProdutoPedi
             produtoPedido.setIdProdutoPedido(proximoId);
 
             String sql = "INSERT INTO PRODUTO_PEDIDO\n" +
-                    "(ID_PRODUTO_PEDIDO,ID_PRODUTO,ID_PEDIDO,QUANTIDADE, VALOR)\n" +
-                    "VALUES(?, ?, ?, ?, ?)\n";
+                    "(ID_PRODUTO_PEDIDO,ID_PRODUTO,ID_PEDIDO,QUANTIDADE, VALOR, DELETADO)\n" +
+                    "VALUES(?, ?, ?, ?, ?, ?)\n";
 
             PreparedStatement stmt = con.prepareStatement(sql);
 
             stmt.setInt(1, proximoId);
             stmt.setInt(2, produtoPedido.getProduto().getIdProduto());
             stmt.setInt(3, produtoPedido.getPedido().getIdPedido());
-            stmt.setInt(4, produtoPedido.getProduto().getQuantidade());
+            stmt.setInt(4, produtoPedido.getQuantidade());
             stmt.setDouble(5, produtoPedido.getValor());
+            stmt.setString(6, produtoPedido.getDeletado());
             int res = stmt.executeUpdate();
             System.out.println("adicionarPedido.res=" + res);
             return produtoPedido;

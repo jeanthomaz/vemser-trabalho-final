@@ -10,21 +10,20 @@ public class Pedido {
     private Cupom cupom; // ID
 
     private int idPedido;
-    private int idCupom;
     private int idUsuario;
     private double valorFinal;
 
     private String deletado;
 
     public Pedido() {
+        this.setDeletado("F");
 
     }
 
-    public Pedido(List<ProdutoPedido> produtosPedido, Cupom cupom, int idPedido, int idCupom, int idUsuario, double valorFinal, String deletado) {
+    public Pedido(List<ProdutoPedido> produtosPedido, Cupom cupom, int idPedido, int idUsuario, double valorFinal, String deletado) {
         this.produtosPedido = produtosPedido;
         this.cupom = cupom;
         this.idPedido = idPedido;
-        this.idCupom = idCupom;
         this.idUsuario = idUsuario;
         this.valorFinal = valorFinal;
         this.setDeletado("F");
@@ -36,7 +35,6 @@ public class Pedido {
                 "produtos=" + produtosPedido +
                 ", cupom=" + cupom +
                 ", idPedido=" + idPedido +
-                ", idCupom=" + idCupom +
                 ", idUsuario=" + idUsuario +
                 ", valorFinal=" + valorFinal +
                 ", deletado='" + deletado + '\'' +
@@ -67,14 +65,6 @@ public class Pedido {
         this.idPedido = idPedido;
     }
 
-    public int getIdCupom() {
-        return idCupom;
-    }
-
-    public void setIdCupom(int idCupom) {
-        this.idCupom = idCupom;
-    }
-
     public int getIdUsuario() {
         return idUsuario;
     }
@@ -87,18 +77,8 @@ public class Pedido {
         this.valorFinal = valorFinal;
     }
 
-    public double getValorFinal() { // mudar para service
-        if (produtosPedido.size() > 0) {
-            double valorFinal = 0;
-            for (ProdutoPedido value : produtosPedido) {
-                valorFinal += value.getValor();
-            }
-            if (cupom.getDeletado().equals("F")) {
-                valorFinal = valorFinal - cupom.getValor();
-            }
-            return valorFinal;
-        }
-        return 0;
+    public double getValorFinal() {
+        return valorFinal;
     }
 
     public String getDeletado() {

@@ -1,6 +1,7 @@
 package com.dbc.repository;
 
 import com.dbc.exceptions.*;
+import com.dbc.model.Cupom;
 import com.dbc.model.Pedido;
 
 import java.sql.*;
@@ -34,12 +35,16 @@ public class PedidoRepository implements Repositorio<Integer, Pedido> {
 
             String sql = "INSERT INTO PEDIDO\n" +
                     "(ID_PEDIDO,ID_CUPOM,ID_USUARIO,VALOR_FINAL, DELETADO)\n" +
-                    "VALUES(?, ?, ?, ?)\n";
+                    "VALUES(?, ?, ?, ?, ?)\n";
 
             PreparedStatement stmt = con.prepareStatement(sql);
 
             stmt.setInt(1, pedido.getIdPedido());
-            stmt.setInt(2, pedido.getIdCupom());
+            if(pedido.getCupom() != null){
+                stmt.setInt(2, pedido.getCupom().getIdCupom());
+            }else{
+                stmt.setNull(2,java.sql.Types.NULL);
+            }
             stmt.setInt(3, pedido.getIdUsuario());
             stmt.setDouble(4, pedido.getValorFinal());
             stmt.setString(5, pedido.getDeletado());
@@ -47,6 +52,7 @@ public class PedidoRepository implements Repositorio<Integer, Pedido> {
             System.out.println("adicionarPedido.res=" + res);
             return pedido;
         } catch (SQLException e) {
+            e.printStackTrace();
             throw new BancoDeDadosException(e.getCause());
         } finally {
             try {
@@ -107,7 +113,11 @@ public class PedidoRepository implements Repositorio<Integer, Pedido> {
 
             PreparedStatement stmt = con.prepareStatement(sql.toString());
 
-            stmt.setInt(1, pedido.getIdCupom());
+            if(pedido.getCupom() != null){
+                stmt.setInt(1, pedido.getCupom().getIdCupom());
+            }else{
+                stmt.setNull(1,java.sql.Types.NULL);
+            }
             stmt.setInt(2, pedido.getIdUsuario());
             stmt.setDouble(3, pedido.getValorFinal());
             stmt.setString(4, pedido.getDeletado());
@@ -145,8 +155,9 @@ public class PedidoRepository implements Repositorio<Integer, Pedido> {
 
             while (res.next()) {
                 Pedido pedido = new Pedido();
+                pedido.setCupom(new Cupom());
                 pedido.setIdPedido(res.getInt("ID_PEDIDO"));
-                pedido.setIdCupom(res.getInt("ID_CUPOM"));
+                pedido.getCupom().setIdCupom(res.getInt("ID_CUPOM"));
                 pedido.setIdUsuario(res.getInt("ID_USUARIO"));
                 pedido.setValorFinal(res.getDouble("VALOR_FINAL"));
                 pedidos.add(pedido);

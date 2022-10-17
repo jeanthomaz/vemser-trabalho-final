@@ -2,25 +2,20 @@ package com.dbc.model;
 
 public class Cupom {
 
-    private int idCupom;
+    private Integer idCupom;
     private double valor;
 
     private String deletado;
 
 
     public Cupom(){
-
-    }
-
-    public Cupom(int idCupom, double valor) {
-        this.idCupom = idCupom;
-        this.valor = valor;
         this.setDeletado("F");
     }
 
-    public void imprimirCupom(){
-        System.out.println("com.dbc.model.Cupom de desconto de " + valor * 100 + "%");
-        System.out.println("Ainda é autenticável: " + deletado);
+    public Cupom(Integer idCupom, double valor) {
+        this.idCupom = idCupom;
+        this.valor = valor;
+        this.setDeletado("F");
     }
 
     @Override
@@ -32,11 +27,11 @@ public class Cupom {
                 '}';
     }
 
-    public int getIdCupom() {
+    public Integer getIdCupom() {
         return idCupom;
     }
 
-    public void setIdCupom(int idCupom) {
+    public void setIdCupom(Integer idCupom) {
         this.idCupom = idCupom;
     }
 

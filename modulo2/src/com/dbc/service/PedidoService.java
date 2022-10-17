@@ -2,6 +2,7 @@ package com.dbc.service;
 
 import com.dbc.exceptions.*;
 import com.dbc.model.Pedido;
+import com.dbc.model.Produto;
 import com.dbc.model.ProdutoPedido;
 import com.dbc.repository.PedidoRepository;
 import com.dbc.repository.ProdutoPedidoRepository;
@@ -19,19 +20,36 @@ public class PedidoService {
     }
 
     // criação de um objeto
-    public void adicionarPedido(Pedido pedido) { // vai adicionar tudo dentro da tabela N para N (Pedido_Produto)
+    public Pedido adicionarPedido(Pedido pedido) { // vai adicionar tudo dentro da tabela N para N (Pedido_Produto)
         try {
+            Double valorFinalPedido = calcularValorFinal(pedido);
+            pedido.setValorFinal(valorFinalPedido);
             Pedido pedidoAdicionado = pedidoRepository.adicionar(pedido);
             for (ProdutoPedido produtoPedido : pedidoAdicionado.getProdutosPedido()) {
                 produtoPedido.setPedido(pedidoAdicionado);
                 produtoPedidoRepository.adicionar(produtoPedido);
             }
             System.out.println("Pedido adicionado com sucesso! " + pedidoAdicionado);
+            return pedidoAdicionado;
         } catch (BancoDeDadosException e) {
             e.printStackTrace();
-        } catch (Exception e) {
-            System.out.println("ERRO: " + e.getMessage());
         }
+        return null;
+    }
+
+    //Calculo valor final
+    public double calcularValorFinal(Pedido pedido) { // mudar para service
+        if (pedido.getProdutosPedido().size() > 0) {
+            double valorFinal = 0;
+            for (ProdutoPedido value : pedido.getProdutosPedido()) {
+                valorFinal += value.getValor();
+            }
+            if (pedido.getCupom() != null && pedido.getCupom().getDeletado().equals("F")) {
+                valorFinal = valorFinal - pedido.getCupom().getValor();
+            }
+            return valorFinal;
+        }
+        return 0;
     }
 
     // remoção
@@ -63,4 +81,6 @@ public class PedidoService {
             e.printStackTrace();
         }
     }
+
+
 }

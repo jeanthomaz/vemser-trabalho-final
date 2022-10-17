@@ -18,7 +18,7 @@ public class Usuario {
     private String deletado;
 
     public Usuario(){
-
+        this.setDeletado("F");
     }
 
     public Usuario(Integer id, String email, String senha, String pix, String nome, String endereco, String cpf, String cidade, String estado, String telefone) {

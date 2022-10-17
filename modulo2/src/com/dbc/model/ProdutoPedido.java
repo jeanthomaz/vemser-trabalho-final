@@ -15,13 +15,15 @@ public class ProdutoPedido {
     private String deletado;
 
     public ProdutoPedido(){
-
+        this.setDeletado("F");
     }
+
     public ProdutoPedido(Integer idProdutoPedido, Produto produto, Pedido pedido, Integer quantidade, Double valor) {
         this.idProdutoPedido = idProdutoPedido;
         this.produto = produto;
         this.pedido = pedido;
         this.quantidade = quantidade;
+        this.valor = valor;
         this.setDeletado("F");
     }
 
@@ -29,8 +31,8 @@ public class ProdutoPedido {
     public String toString() {
         return "ProdutoPedido{" +
                 "idProdutoPedido=" + idProdutoPedido +
-                ", produto=" + produto +
-                ", pedido=" + pedido +
+                ", produto=" + produto.getIdProduto() +
+                ", pedido=" + (pedido == null ? "" : pedido.getIdPedido()) +
                 ", quantidade=" + quantidade +
                 ", valor=" + valor +
                 '}';
