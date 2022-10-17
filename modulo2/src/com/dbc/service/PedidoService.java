@@ -1,6 +1,7 @@
 package com.dbc.service;
 
 import com.dbc.exceptions.*;
+import com.dbc.model.Cupom;
 import com.dbc.model.Pedido;
 import com.dbc.model.Produto;
 import com.dbc.model.ProdutoPedido;
@@ -50,6 +51,17 @@ public class PedidoService {
             return valorFinal;
         }
         return 0;
+    }
+
+    public Pedido inserirCupom(Cupom cupom, Pedido pedido){
+        try {
+            pedido.setCupom(cupom);
+            pedidoRepository.atualizarCupom(pedido.getCupom().getIdCupom(),pedido);
+            pedidoRepository.editar(pedido.getIdPedido(),pedido);
+        } catch (BancoDeDadosException e) {
+            e.printStackTrace();
+        }
+        return pedido;
     }
 
     // remoção

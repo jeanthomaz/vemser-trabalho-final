@@ -193,6 +193,7 @@ public class Main {
                                     produtoPedido.setQuantidade(quantidadeDesejada);
                                     produtoPedido.setValor(produtoSelecionado.getValor()*quantidadeDesejada);
                                     pedido.getProdutosPedido().add(produtoPedido);
+                                    pedido.setValorFinal(produtoPedido.getValor());
                                     System.out.println(produtoPedido);
                                 }
                                 System.out.println("PRODUTOS SELECIONADOS COM SUCESSO");
@@ -202,13 +203,27 @@ public class Main {
                                 cupomService.listarCupons().forEach(System.out::println);
                                 Integer cupomSelecionado = scanner.nextInt();
                                 scanner.nextLine();
+
                                 List<Cupom> listaCupons = cupomService.listarCupons();
                                 Cupom cupom3 = listaCupons.stream()
                                         .filter(cupom -> cupom.getIdCupom().equals(cupomSelecionado))
                                         .findFirst()
                                         .get();
+
                                 Pedido pedidoCriado = pedidoService.adicionarPedido(pedido);
+//                                pedido.setCupom(cupom3);
+//                                pedidoService.inserirCupom(cupom3,pedido);
+//                                pedidoService.calcularValorFinal(pedido);
                                 pedidoCriado.setCupom(cupom3);
+                                double valorFinalComCupom = 0;
+                                if (pedido.getCupom() != null && pedido.getCupom().getDeletado().equals("F")) {
+                                    valorFinalComCupom = pedido.getValorFinal() - pedidoCriado.getCupom().getValor();
+                                }
+                                pedido.setValorFinal(valorFinalComCupom);
+                                System.out.println("---------------------------------");
+                                System.out.println(pedido);
+                                System.out.println("---------------------------------");
+                                scanner.nextLine();
                                 System.out.println(pedidoCriado);
                                 scanner.nextLine();
                                 break;

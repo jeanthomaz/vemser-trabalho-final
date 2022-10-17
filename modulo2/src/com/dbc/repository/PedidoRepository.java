@@ -40,10 +40,10 @@ public class PedidoRepository implements Repositorio<Integer, Pedido> {
             PreparedStatement stmt = con.prepareStatement(sql);
 
             stmt.setInt(1, pedido.getIdPedido());
-            if(pedido.getCupom() != null){
+            if (pedido.getCupom() != null) {
                 stmt.setInt(2, pedido.getCupom().getIdCupom());
-            }else{
-                stmt.setNull(2,java.sql.Types.NULL);
+            } else {
+                stmt.setNull(2, java.sql.Types.NULL);
             }
             stmt.setInt(3, pedido.getIdUsuario());
             stmt.setDouble(4, pedido.getValorFinal());
@@ -113,10 +113,10 @@ public class PedidoRepository implements Repositorio<Integer, Pedido> {
 
             PreparedStatement stmt = con.prepareStatement(sql.toString());
 
-            if(pedido.getCupom() != null){
+            if (pedido.getCupom() != null) {
                 stmt.setInt(1, pedido.getCupom().getIdCupom());
-            }else{
-                stmt.setNull(1,java.sql.Types.NULL);
+            } else {
+                stmt.setNull(1, java.sql.Types.NULL);
             }
             stmt.setInt(2, pedido.getIdUsuario());
             stmt.setDouble(3, pedido.getValorFinal());
@@ -176,5 +176,33 @@ public class PedidoRepository implements Repositorio<Integer, Pedido> {
         return pedidos;
     }
 
-    //fazer um insert
+    public Pedido atualizarCupom(Integer id, Pedido pedido) throws BancoDeDadosException {
+        Connection con = null;
+        try {
+            con = ConexaoBancoDeDados.getConnection();
+
+            StringBuilder sql = new StringBuilder();
+            sql.append("UPDATE PEDIDO SET ");
+            sql.append(" ID_CUPOM = ?,");
+
+            PreparedStatement stmt = con.prepareStatement(sql.toString());
+
+            stmt.setInt(1, pedido.getCupom().getIdCupom());
+
+            // Executa-se a consulta
+            int res = stmt.executeUpdate();
+            System.out.println("editarCupom.res=" + res);
+        } catch (SQLException e) {
+            throw new BancoDeDadosException(e.getCause());
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return pedido;
+    }
 }
