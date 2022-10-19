@@ -65,36 +65,6 @@ public class UsuarioService {
         }
     }
 
-//    public Usuario fazerLogin (String email, String senha) throws EmailRepetidoException, BancoDeDadosException {
-//        Usuario usuario = new Usuario();
-//        usuario.setEmail(email);
-//        usuario.setSenha(senha);
-//        if (usuarioRepository.findByEmail(usuario)) {
-//            if (usuarioRepository.findBySenha(usuario)) {
-//                return usuario;
-//            } else {
-//                throw new EmailRepetidoException("Senha não existente, digitar novamente");
-//            }
-//        }
-//        else {
-//            throw new EmailRepetidoException("E-mail não existente, digitar novamente");
-//        }
-//    }
-//    public Usuario fazerLogin(String email, String senha) throws EmailRepetidoException, BancoDeDadosException {
-//
-//        Usuario usuario = new Usuario();
-//        usuario.setEmail(email);
-//        usuario.setSenha(senha);
-//            if(!usuarioRepository.findByEmail(usuario)){
-//                if(!usuarioRepository.findBySenha(usuario)){
-//                    return usuarioRepository.selecionarUsuario(usuario);
-//                } else{
-//                    throw new EmailRepetidoException("Senha inválida!");
-//                }
-//            } else {
-//                throw new EmailRepetidoException("Email inválido!");
-//            }
-//        }
         public Usuario verificarUsuario (Usuario usuario) {
         try {
             return usuarioRepository.pegarLogin(usuario);

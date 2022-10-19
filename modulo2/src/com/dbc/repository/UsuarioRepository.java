@@ -36,7 +36,7 @@ public class UsuarioRepository implements Repositorio<Integer, Usuario> {
 
             String sql = "INSERT INTO USUARIO\n" +
                     "(ID_USUARIO,PIX,EMAIL,SENHA ,NOME,ENDERECO,CPF,CIDADE,ESTADO,TELEFONE, DELETADO)\n" +
-                    "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)\n";
+                    "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)\n";
 
             PreparedStatement stmt = con.prepareStatement(sql);
 

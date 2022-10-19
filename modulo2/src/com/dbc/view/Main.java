@@ -29,7 +29,7 @@ public class Main {
         //EDITAR DAQUI PRA BAIXO ///
 
 //       usuarioService.listar();
-        pedidoService.listarPedido();
+//        pedidoService.listarPedido();
 
         int opcao = -1;
         int escolha = 9;

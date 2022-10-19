@@ -57,11 +57,10 @@ public class PedidoService {
         try {
             pedido.setCupom(cupom);
             pedidoRepository.atualizarCupom(pedido.getCupom().getIdCupom(),pedido);
-            pedidoRepository.editar(pedido.getIdPedido(),pedido);
+            pedidoRepository.editar(pedido.getIdPedido(),pedido);.
         } catch (BancoDeDadosException e) {
             e.printStackTrace();
         }
-        return pedido;
     }
 
     // remoção
