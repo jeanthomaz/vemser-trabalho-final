@@ -1,5 +1,7 @@
 package com.dbc.vemser.trabalhofinal.pokestore.model;
 
+import com.dbc.vemser.trabalhofinal.pokestore.model.*;
+
 import java.util.ArrayList;
 import java.util.List;
 

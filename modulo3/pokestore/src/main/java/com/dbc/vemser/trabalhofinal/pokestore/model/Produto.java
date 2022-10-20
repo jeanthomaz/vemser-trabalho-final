@@ -1,6 +1,6 @@
 package com.dbc.vemser.trabalhofinal.pokestore.model;
 
-import com.dbc.vemser.trabalhofinal.pokestore.enums.Tipos;
+import com.dbc.vemser.trabalhofinal.pokestore.enums.*;
 
 public class Produto {
 

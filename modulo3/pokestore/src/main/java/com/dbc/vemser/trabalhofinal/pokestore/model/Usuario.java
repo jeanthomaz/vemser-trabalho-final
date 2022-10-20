@@ -5,9 +5,7 @@ public class Usuario {
     private Integer idUsuario;
     private String email;
     private String senha;
-
     private String pix;
-
     private String nome;
     private String endereco;
     private String cpf;
