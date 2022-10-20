@@ -1,14 +1,22 @@
-package com.dbc.vemser.trabalhofinal.pokestore.repository;
+package com.dbc.vemser.pokestore.repository;
 
 
-import com.dbc.vemser.trabalhofinal.pokestore.exceptions.*;
-import com.dbc.vemser.trabalhofinal.pokestore.model.ProdutoPedido;
+import com.dbc.vemser.pokestore.config.ConexaoBancoDeDados;
+import com.dbc.vemser.pokestore.exceptions.BancoDeDadosException;
+import com.dbc.vemser.pokestore.model.ProdutoPedido;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProdutoPedidoRepository implements Repositorio<Integer, ProdutoPedido> {
+
+
+    private ConexaoBancoDeDados conexaoBancoDeDados;
+
+    public ProdutoPedidoRepository(ConexaoBancoDeDados conexaoBancoDeDados){
+        this.conexaoBancoDeDados = conexaoBancoDeDados;
+    }
 
     @Override
     public Integer getProximoId(Connection connection) throws SQLException {
@@ -27,7 +35,7 @@ public class ProdutoPedidoRepository implements Repositorio<Integer, ProdutoPedi
     public ProdutoPedido adicionar(ProdutoPedido produtoPedido) throws BancoDeDadosException {
         Connection con = null;
         try {
-            con = ConexaoBancoDeDados.getConnection();
+            con = conexaoBancoDeDados.getConnection();
 
             Integer proximoId = this.getProximoId(con);
             produtoPedido.setIdProdutoPedido(proximoId);
@@ -64,7 +72,7 @@ public class ProdutoPedidoRepository implements Repositorio<Integer, ProdutoPedi
     public boolean remover(Integer id) throws BancoDeDadosException {
         Connection con = null;
         try {
-            con = ConexaoBancoDeDados.getConnection();
+            con = conexaoBancoDeDados.getConnection();
 
             String sql = "UPDATE PRODUTO_PEDIDO \n" +
                     " SET DELETADO = 'T'\n" +
@@ -95,7 +103,7 @@ public class ProdutoPedidoRepository implements Repositorio<Integer, ProdutoPedi
     public boolean editar(Integer id, ProdutoPedido produtoPedido) throws BancoDeDadosException {
         Connection con = null;
         try {
-            con = ConexaoBancoDeDados.getConnection();
+            con = conexaoBancoDeDados.getConnection();
 
             StringBuilder sql = new StringBuilder();
             sql.append("UPDATE PRODUTO_PEDIDO SET ");
@@ -137,7 +145,7 @@ public class ProdutoPedidoRepository implements Repositorio<Integer, ProdutoPedi
         List<ProdutoPedido> produtoPedidos = new ArrayList<>();
         Connection con = null;
         try {
-            con = ConexaoBancoDeDados.getConnection();
+            con = conexaoBancoDeDados.getConnection();
             Statement stmt = con.createStatement();
 
             String sql = "SELECT * FROM PRODUTO_PEDIDO" +

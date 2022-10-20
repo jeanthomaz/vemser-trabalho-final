@@ -1,17 +1,42 @@
-package com.dbc.vemser.trabalhofinal.pokestore.model;
+package com.dbc.vemser.pokestore.model;
 
-import com.dbc.vemser.trabalhofinal.pokestore.enums.*;
+import com.dbc.vemser.pokestore.enums.Tipos;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.Size;
 
 public class Produto {
 
+    @NotBlank
+    @Positive
     private Integer idProduto;
+
+    @NotBlank
+    @Size(max = 250)
     private String nome;
+
+    @NotBlank
+    @Size(max = 250)
     private String descricao;
+
+    @NotBlank
+    @Positive
     private int quantidade;
+
+    @NotBlank
+    @Positive
     private Tipos tipo;
+
+    @NotBlank
+    @Positive
     private double valor;
+
+    @NotBlank
+    @Positive
     private int idUsuario;
 
+    @NotBlank
     private String deletado;
 
     Usuario usuario;

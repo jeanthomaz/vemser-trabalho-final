@@ -1,6 +1,6 @@
-package com.dbc.vemser.trabalhofinal.pokestore.repository;
+package com.dbc.vemser.pokestore.repository;
 
-import com.dbc.vemser.trabalhofinal.pokestore.exceptions.*;
+import com.dbc.vemser.pokestore.exceptions.BancoDeDadosException;
 
 import java.sql.Connection;
 import java.sql.SQLException;

@@ -1,4 +1,4 @@
-package com.dbc.vemser.trabalhofinal.pokestore.model;
+package com.dbc.vemser.pokestore.model;
 
 public interface Vender {
 

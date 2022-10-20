@@ -1,17 +1,32 @@
-package com.dbc.vemser.trabalhofinal.pokestore.model;
+package com.dbc.vemser.pokestore.model;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
 
 public class ProdutoPedido {
 
+    @NotBlank
+    @Positive
     private Integer idProdutoPedido;
 
+    @NotBlank
+    @Positive
     private Produto produto;
 
+    @NotBlank
+    @Positive
     private Pedido pedido;
 
+    @NotBlank
+    @Positive
     private Integer quantidade;
 
+    @NotBlank
+    @Positive
     private Double valor;
 
+    @NotBlank
+    @Positive
     private String deletado;
 
     public ProdutoPedido(){

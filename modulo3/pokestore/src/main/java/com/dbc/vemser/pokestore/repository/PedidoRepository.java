@@ -1,14 +1,23 @@
-package com.dbc.vemser.trabalhofinal.pokestore.repository;
+package com.dbc.vemser.pokestore.repository;
 
-import com.dbc.vemser.trabalhofinal.pokestore.exceptions.*;
-import com.dbc.vemser.trabalhofinal.pokestore.model.Cupom;
-import com.dbc.vemser.trabalhofinal.pokestore.model.Pedido;
+import com.dbc.vemser.pokestore.config.ConexaoBancoDeDados;
+import com.dbc.vemser.pokestore.exceptions.BancoDeDadosException;
+import com.dbc.vemser.pokestore.model.Cupom;
+import com.dbc.vemser.pokestore.model.Pedido;
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class PedidoRepository implements Repositorio<Integer, Pedido> {
+
+    private ConexaoBancoDeDados conexaoBancoDeDados;
+
+    public PedidoRepository(ConexaoBancoDeDados conexaoBancoDeDados){
+        this.conexaoBancoDeDados = conexaoBancoDeDados;
+    }
     @Override
     public Integer getProximoId(Connection connection) throws SQLException {
         String sql = "SELECT SEQ_PEDIDO.nextval mysequence from DUAL";
@@ -19,7 +28,6 @@ public class PedidoRepository implements Repositorio<Integer, Pedido> {
         if (res.next()) {
             return res.getInt("mysequence");
         }
-
         return null;
     }
 
@@ -27,7 +35,7 @@ public class PedidoRepository implements Repositorio<Integer, Pedido> {
     public Pedido adicionar(Pedido pedido) throws BancoDeDadosException {
         Connection con = null;
         try {
-            con = ConexaoBancoDeDados.getConnection();
+            con = conexaoBancoDeDados.getConnection();
 
             Integer proximoId = this.getProximoId(con);
             pedido.setIdPedido(proximoId);
@@ -69,7 +77,7 @@ public class PedidoRepository implements Repositorio<Integer, Pedido> {
     public boolean remover(Integer id) throws BancoDeDadosException {
         Connection con = null;
         try {
-            con = ConexaoBancoDeDados.getConnection();
+            con = conexaoBancoDeDados.getConnection();
 
             String sql = "UPDATE PEDIDO \n" +
                     " SET DELETADO = 'T'\n" +
@@ -101,7 +109,7 @@ public class PedidoRepository implements Repositorio<Integer, Pedido> {
     public boolean editar(Integer id, Pedido pedido) throws BancoDeDadosException {
         Connection con = null;
         try {
-            con = ConexaoBancoDeDados.getConnection();
+            con = conexaoBancoDeDados.getConnection();
 
             StringBuilder sql = new StringBuilder();
             sql.append("UPDATE PEDIDO SET ");
@@ -143,7 +151,7 @@ public class PedidoRepository implements Repositorio<Integer, Pedido> {
         List<Pedido> pedidos = new ArrayList<>();
         Connection con = null;
         try {
-            con = ConexaoBancoDeDados.getConnection();
+            con = conexaoBancoDeDados.getConnection();
             Statement stmt = con.createStatement();
 
             String sql = "SELECT * FROM PEDIDO" +
@@ -178,7 +186,7 @@ public class PedidoRepository implements Repositorio<Integer, Pedido> {
     public Pedido atualizarCupom(Integer id, Pedido pedido) throws BancoDeDadosException {
         Connection con = null;
         try {
-            con = ConexaoBancoDeDados.getConnection();
+            con = conexaoBancoDeDados.getConnection();
 
             StringBuilder sql = new StringBuilder();
             sql.append("UPDATE PEDIDO SET ");

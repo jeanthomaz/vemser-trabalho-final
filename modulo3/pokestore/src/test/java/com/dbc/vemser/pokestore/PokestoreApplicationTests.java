@@ -1,4 +1,4 @@
-package com.dbc.vemser.trabalhofinal.pokestore;
+package com.dbc.vemser.pokestore;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

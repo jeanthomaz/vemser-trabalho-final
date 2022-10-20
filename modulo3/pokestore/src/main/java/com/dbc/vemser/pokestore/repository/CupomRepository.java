@@ -1,15 +1,27 @@
-package com.dbc.vemser.trabalhofinal.pokestore.repository;
+package com.dbc.vemser.pokestore.repository;
 
-import com.dbc.vemser.trabalhofinal.pokestore.exceptions.BancoDeDadosException;
-import com.dbc.vemser.trabalhofinal.pokestore.model.Cupom;
+import com.dbc.vemser.pokestore.exceptions.BancoDeDadosException;
+import com.dbc.vemser.pokestore.model.Cupom;
+import com.dbc.vemser.pokestore.config.ConexaoBancoDeDados;
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class CupomRepository implements Repositorio<Integer, Cupom> {
+
+    private ConexaoBancoDeDados conexaoBancoDeDados;
+
+    public CupomRepository(ConexaoBancoDeDados conexaoBancoDeDados){
+
+        this.conexaoBancoDeDados = conexaoBancoDeDados;
+    }
+
     @Override
     public Integer getProximoId(Connection connection) throws SQLException {
+
         String sql = "SELECT SEQ_CUPOM.nextval mysequence from DUAL";
 
         Statement stmt = connection.createStatement();
@@ -25,7 +37,7 @@ public class CupomRepository implements Repositorio<Integer, Cupom> {
     public Cupom adicionar(Cupom cupom) throws BancoDeDadosException {
         Connection con = null;
         try {
-            con = ConexaoBancoDeDados.getConnection();
+            con = conexaoBancoDeDados.getConnection();
 
             Integer proximoId = this.getProximoId(con);
             cupom.setIdCupom(proximoId);
@@ -60,7 +72,8 @@ public class CupomRepository implements Repositorio<Integer, Cupom> {
     public boolean remover(Integer id) throws BancoDeDadosException {
         Connection con = null;
         try {
-            con = ConexaoBancoDeDados.getConnection();
+
+            con = conexaoBancoDeDados.getConnection();
 
             String sql = "UPDATE CUPOM \n" +
                     "SET DELETADO = 'T'\n" +
@@ -92,7 +105,7 @@ public class CupomRepository implements Repositorio<Integer, Cupom> {
     public boolean editar(Integer id, Cupom cupom) throws BancoDeDadosException {
         Connection con = null;
         try {
-            con = ConexaoBancoDeDados.getConnection();
+            con = conexaoBancoDeDados.getConnection();
 
             StringBuilder sql = new StringBuilder();
             sql.append("UPDATE CUPOM SET ");
@@ -130,7 +143,7 @@ public class CupomRepository implements Repositorio<Integer, Cupom> {
 
         Connection con = null;
         try {
-            con = ConexaoBancoDeDados.getConnection();
+            con = conexaoBancoDeDados.getConnection();
             Statement stmt = con.createStatement();
 
             String sql = "SELECT * FROM CUPOM" +

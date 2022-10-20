@@ -1,10 +1,21 @@
-package com.dbc.vemser.trabalhofinal.pokestore.model;
+package com.dbc.vemser.pokestore.model;
+
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 
 public class Cupom {
 
+
+    @NotNull
+    @Positive
     private Integer idCupom;
+
+    @NotNull
+    @Positive
     private double valor;
 
+    @NotNull
     private String deletado;
 
 

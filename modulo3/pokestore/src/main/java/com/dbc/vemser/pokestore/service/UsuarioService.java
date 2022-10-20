@@ -1,8 +1,9 @@
-package com.dbc.vemser.trabalhofinal.pokestore.service;
+package com.dbc.vemser.pokestore.service;
 
+import com.dbc.vemser.pokestore.exceptions.BancoDeDadosException;
 import com.dbc.vemser.trabalhofinal.pokestore.exceptions.*;
-import com.dbc.vemser.trabalhofinal.pokestore.model.Usuario;
-import com.dbc.vemser.trabalhofinal.pokestore.repository.UsuarioRepository;
+import com.dbc.vemser.pokestore.model.Usuario;
+import com.dbc.vemser.pokestore.repository.UsuarioRepository;
 
 import java.util.List;
 

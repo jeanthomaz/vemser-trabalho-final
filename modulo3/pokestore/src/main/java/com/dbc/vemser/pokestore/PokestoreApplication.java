@@ -1,4 +1,4 @@
-package com.dbc.vemser.trabalhofinal.pokestore;
+package com.dbc.vemser.pokestore;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,4 +1,4 @@
-package com.dbc.vemser.trabalhofinal.pokestore.enums;
+package com.dbc.vemser.pokestore.enums;
 
 import java.util.Arrays;
 

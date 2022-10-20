@@ -1,14 +1,22 @@
-package com.dbc.vemser.trabalhofinal.pokestore.repository;
+package com.dbc.vemser.pokestore.repository;
 
-import com.dbc.vemser.trabalhofinal.pokestore.exceptions.*;
-import com.dbc.vemser.trabalhofinal.pokestore.model.Usuario;
+import com.dbc.vemser.pokestore.config.ConexaoBancoDeDados;
+import com.dbc.vemser.pokestore.exceptions.BancoDeDadosException;
+import com.dbc.vemser.pokestore.model.Usuario;
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class UsuarioRepository implements Repositorio<Integer, Usuario> {
 
+    private ConexaoBancoDeDados conexaoBancoDeDados;
+
+    public UsuarioRepository(ConexaoBancoDeDados conexaoBancoDeDados){
+        this.conexaoBancoDeDados = conexaoBancoDeDados;
+    }
 
     @Override
     public Integer getProximoId(Connection connection) throws SQLException {
@@ -28,7 +36,7 @@ public class UsuarioRepository implements Repositorio<Integer, Usuario> {
     public Usuario adicionar(Usuario usuario) throws BancoDeDadosException {
         Connection con = null;
         try {
-            con = ConexaoBancoDeDados.getConnection();
+            con = conexaoBancoDeDados.getConnection();
 
             Integer proximoId = this.getProximoId(con);
             usuario.setIdUsuario(proximoId);
@@ -71,7 +79,7 @@ public class UsuarioRepository implements Repositorio<Integer, Usuario> {
     public boolean remover(Integer id) throws BancoDeDadosException {
         Connection con = null;
         try {
-            con = ConexaoBancoDeDados.getConnection();
+            con = conexaoBancoDeDados.getConnection();
 
             String sql = "UPDATE USUARIO \n" +
                     "SET DELETADO = 'T'\n" +
@@ -103,7 +111,7 @@ public class UsuarioRepository implements Repositorio<Integer, Usuario> {
     public boolean editar(Integer id, Usuario usuario) throws BancoDeDadosException {
         Connection con = null;
         try {
-            con = ConexaoBancoDeDados.getConnection();
+            con = conexaoBancoDeDados.getConnection();
 
             StringBuilder sql = new StringBuilder();
             sql.append("UPDATE USUARIO SET ");
@@ -157,7 +165,7 @@ public class UsuarioRepository implements Repositorio<Integer, Usuario> {
 
         Connection con = null;
         try {
-            con = ConexaoBancoDeDados.getConnection();
+            con = conexaoBancoDeDados.getConnection();
             Statement stmt = con.createStatement();
 
             String sql = "SELECT * FROM USUARIO" +
@@ -200,7 +208,7 @@ public class UsuarioRepository implements Repositorio<Integer, Usuario> {
         Connection con = null;
         boolean existe = false;
         try {
-            con = ConexaoBancoDeDados.getConnection();
+            con = conexaoBancoDeDados.getConnection();
             Statement stmt = con.createStatement();
 
             String sql = "SELECT * FROM USUARIO" +
@@ -228,7 +236,7 @@ public class UsuarioRepository implements Repositorio<Integer, Usuario> {
         Connection con = null;
         boolean existe = false;
         try {
-            con = ConexaoBancoDeDados.getConnection();
+            con = conexaoBancoDeDados.getConnection();
             Statement stmt = con.createStatement();
 
             String sql = "SELECT * FROM USUARIO" +
@@ -256,7 +264,7 @@ public class UsuarioRepository implements Repositorio<Integer, Usuario> {
         Connection con = null;
         boolean existe = false;
         try {
-            con = ConexaoBancoDeDados.getConnection();
+            con = conexaoBancoDeDados.getConnection();
             Statement stmt = con.createStatement();
 
             String sql = "SELECT * FROM USUARIO" +
@@ -284,7 +292,7 @@ public class UsuarioRepository implements Repositorio<Integer, Usuario> {
         Connection con = null;
         boolean existe = false;
         try {
-            con = ConexaoBancoDeDados.getConnection();
+            con = conexaoBancoDeDados.getConnection();
             Statement stmt = con.createStatement();
 
             String sql = "SELECT * FROM USUARIO" +
@@ -312,7 +320,7 @@ public class UsuarioRepository implements Repositorio<Integer, Usuario> {
         Connection con = null;
         boolean existe = false;
         try {
-            con = ConexaoBancoDeDados.getConnection();
+            con = conexaoBancoDeDados.getConnection();
             Statement stmt = con.createStatement();
 
             String sql = "SELECT * FROM USUARIO" +
@@ -341,7 +349,7 @@ public class UsuarioRepository implements Repositorio<Integer, Usuario> {
         Usuario usuario = new Usuario();
 
         try {
-            con = ConexaoBancoDeDados.getConnection();
+            con = conexaoBancoDeDados.getConnection();
             String sql = "SELECT * FROM USUARIO " +
                     " WHERE EMAIL = ? AND SENHA = ?";
 

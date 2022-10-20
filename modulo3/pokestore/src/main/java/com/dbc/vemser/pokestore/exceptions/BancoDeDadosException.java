@@ -1,4 +1,4 @@
-package com.dbc.vemser.trabalhofinal.pokestore.exceptions;
+package com.dbc.vemser.pokestore.exceptions;
 
 import java.sql.SQLException;
 

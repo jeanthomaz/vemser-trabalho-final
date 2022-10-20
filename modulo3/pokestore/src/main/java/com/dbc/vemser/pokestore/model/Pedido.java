@@ -1,20 +1,31 @@
-package com.dbc.vemser.trabalhofinal.pokestore.model;
+package com.dbc.vemser.pokestore.model;
 
-import com.dbc.vemser.trabalhofinal.pokestore.model.*;
-
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Pedido {
 
+    @NotNull
     private List<ProdutoPedido> produtosPedido = new ArrayList<>(); // ID
 
+    @Positive
     private Cupom cupom; // ID
 
+    @NotNull
+    @Positive
     private int idPedido;
+
+    @NotNull
+    @Positive
     private int idUsuario;
+
+    @Positive
     private double valorFinal;
 
+    @NotBlank
     private String deletado;
 
     public Pedido() {
