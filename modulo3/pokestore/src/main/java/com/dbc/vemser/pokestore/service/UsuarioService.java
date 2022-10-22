@@ -1,18 +1,17 @@
 package com.dbc.vemser.pokestore.service;
 
-import com.dbc.vemser.pokestore.exceptions.BancoDeDadosException;
-import com.dbc.vemser.trabalhofinal.pokestore.exceptions.*;
-import com.dbc.vemser.pokestore.model.Usuario;
+import com.dbc.vemser.pokestore.exceptions.*;
+import com.dbc.vemser.pokestore.entity.Usuario;
 import com.dbc.vemser.pokestore.repository.UsuarioRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
+@RequiredArgsConstructor
 public class UsuarioService {
-    private UsuarioRepository usuarioRepository;
-
-    public UsuarioService() {
-        usuarioRepository = new UsuarioRepository();
-    }
+    private final UsuarioRepository usuarioRepository;
 
     // criação de um objeto
     public void adicionarUsuario(Usuario usuario) {

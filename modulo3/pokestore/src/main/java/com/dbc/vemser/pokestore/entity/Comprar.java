@@ -1,4 +1,4 @@
-package com.dbc.vemser.pokestore.model;
+package com.dbc.vemser.pokestore.entity;
 
 public interface Comprar {
 

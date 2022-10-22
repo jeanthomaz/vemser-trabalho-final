@@ -2,8 +2,8 @@ package com.dbc.vemser.pokestore.repository;
 
 import com.dbc.vemser.pokestore.config.ConexaoBancoDeDados;
 import com.dbc.vemser.pokestore.exceptions.BancoDeDadosException;
-import com.dbc.vemser.pokestore.model.Cupom;
-import com.dbc.vemser.pokestore.model.Pedido;
+import com.dbc.vemser.pokestore.entity.Cupom;
+import com.dbc.vemser.pokestore.entity.Pedido;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;

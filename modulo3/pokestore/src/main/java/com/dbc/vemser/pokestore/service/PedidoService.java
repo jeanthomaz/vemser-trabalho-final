@@ -2,23 +2,25 @@ package com.dbc.vemser.pokestore.service;
 
 import com.dbc.vemser.pokestore.exceptions.BancoDeDadosException;
 import com.dbc.vemser.pokestore.repository.PedidoRepository;
-import com.dbc.vemser.trabalhofinal.pokestore.exceptions.*;
-import com.dbc.vemser.pokestore.model.Cupom;
-import com.dbc.vemser.pokestore.model.Pedido;
-import com.dbc.vemser.pokestore.model.ProdutoPedido;
+import com.dbc.vemser.pokestore.entity.Cupom;
+import com.dbc.vemser.pokestore.entity.Pedido;
+import com.dbc.vemser.pokestore.entity.ProdutoPedido;
 import com.dbc.vemser.pokestore.repository.ProdutoPedidoRepository;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
+@RequiredArgsConstructor
 public class PedidoService {
-    private PedidoRepository pedidoRepository;
+    private final PedidoRepository pedidoRepository;
 
-    private ProdutoPedidoRepository produtoPedidoRepository;
+    private final ProdutoPedidoRepository produtoPedidoRepository;
 
-    public PedidoService() {
-        pedidoRepository = new PedidoRepository();
-        produtoPedidoRepository = new ProdutoPedidoRepository();
-    }
 
     // criação de um objeto
     public Pedido adicionarPedido(Pedido pedido) { // vai adicionar tudo dentro da tabela N para N (Pedido_Produto)
@@ -57,10 +59,11 @@ public class PedidoService {
         try {
             pedido.setCupom(cupom);
             pedidoRepository.atualizarCupom(pedido.getCupom().getIdCupom(),pedido);
-            pedidoRepository.editar(pedido.getIdPedido(),pedido);.
+            pedidoRepository.editar(pedido.getIdPedido(),pedido);
         } catch (BancoDeDadosException e) {
             e.printStackTrace();
         }
+        return pedido;
     }
 
     // remoção

@@ -1,17 +1,17 @@
 package com.dbc.vemser.pokestore.service;
 
 import com.dbc.vemser.pokestore.exceptions.BancoDeDadosException;
-import com.dbc.vemser.trabalhofinal.pokestore.exceptions.*;
-import com.dbc.vemser.pokestore.model.Produto;
+import com.dbc.vemser.pokestore.entity.Produto;
 import com.dbc.vemser.pokestore.repository.ProdutoRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
+@RequiredArgsConstructor
 public class ProdutoService {
-    private ProdutoRepository produtoRepository;
-
-    public ProdutoService() {
-        produtoRepository = new ProdutoRepository();    }
+    private final ProdutoRepository produtoRepository;
 
     // criação de um objeto
     public void adicionarProduto(Produto produto) {

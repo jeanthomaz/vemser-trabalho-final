@@ -3,7 +3,7 @@ package com.dbc.vemser.pokestore.repository;
 
 import com.dbc.vemser.pokestore.config.ConexaoBancoDeDados;
 import com.dbc.vemser.pokestore.exceptions.BancoDeDadosException;
-import com.dbc.vemser.pokestore.model.ProdutoPedido;
+import com.dbc.vemser.pokestore.entity.ProdutoPedido;
 
 import java.sql.*;
 import java.util.ArrayList;

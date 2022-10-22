@@ -1,19 +1,19 @@
 package com.dbc.vemser.pokestore.service;
 
 import com.dbc.vemser.pokestore.exceptions.BancoDeDadosException;
-import com.dbc.vemser.trabalhofinal.pokestore.exceptions.*;
-import com.dbc.vemser.pokestore.model.Cupom;
+import com.dbc.vemser.pokestore.entity.Cupom;
 import com.dbc.vemser.pokestore.repository.CupomRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
 
 import java.util.List;
 
+@Service
+@RequiredArgsConstructor
 public class CupomService {
-    private CupomRepository cupomRepository;
+    private final CupomRepository cupomRepository;
 
-    public CupomService() {
-
-        cupomRepository = new CupomRepository();
-    }
 
     // criação de um objeto
     public void adicionarCupom(Cupom cupom){
