@@ -1,5 +1,6 @@
 package com.dbc.vemser.pokestore.dto;
 
+import org.hibernate.validator.constraints.UniqueElements;
 import org.hibernate.validator.constraints.br.CPF;
 
 import javax.validation.constraints.NotBlank;
@@ -9,6 +10,7 @@ import javax.validation.constraints.Size;
 public class UsuarioCreateDTO {
 
     @NotBlank
+    @UniqueElements
     private String email;
 
     @NotBlank
@@ -24,6 +26,7 @@ public class UsuarioCreateDTO {
     private String endereco;
 
     @CPF
+    @UniqueElements
     private String cpf;
 
     @NotBlank

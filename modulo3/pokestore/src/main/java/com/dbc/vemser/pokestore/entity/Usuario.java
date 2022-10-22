@@ -3,6 +3,7 @@ package com.dbc.vemser.pokestore.entity;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.validator.constraints.UniqueElements;
 import org.hibernate.validator.constraints.br.CPF;
 
 import javax.validation.constraints.NotBlank;
@@ -20,6 +21,7 @@ public class Usuario {
     private Integer idUsuario;
 
     @NotBlank
+    @UniqueElements
     private String email;
 
     @NotBlank
@@ -35,6 +37,7 @@ public class Usuario {
     private String endereco;
 
     @CPF
+    @UniqueElements
     private String cpf;
 
     @NotBlank
